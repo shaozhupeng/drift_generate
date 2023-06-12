@@ -6,7 +6,25 @@ import 'unsupported.dart'
     if (dart.library.io) 'ffi.dart';
 part 'database.g.dart';
 
-@DriftDatabase(daos: [MessageDao, ChatItemDao], tables: [Message, ChatItem])
+@DriftDatabase(daos: [
+  MessageDao,
+  ChatItemDao,
+  CharactersDao,
+  ChatHistoryDao,
+  ChatSessionsDao,
+  UserBehaviorDao,
+  UserDao,
+  UserInteractionsDao
+], tables: [
+  Message,
+  ChatItem,
+  Characters,
+  ChatHistory,
+  ChatSessions,
+  UserBehavior,
+  UserInteractions,
+  User,
+])
 class MyDatabase extends _$MyDatabase {
   MyDatabase([QueryExecutor? e]) : super(e ?? openConnection());
 

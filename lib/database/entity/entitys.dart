@@ -1,3 +1,9 @@
 export 'message_entity.dart';
 export 'note_entity.dart';
 export 'chatitem_entity.dart';
+export 'user.dart';
+export 'user_interactions.dart';
+export 'user_behavior.dart';
+export 'chat_sessions.dart';
+export 'chat_history.dart';
+export 'characters.dart';

@@ -7,6 +7,8 @@ class ChatItem extends Table {
   TextColumn get lastMsg => text().named('lastMsg')();
   TextColumn get date => text().named('date')();
   TextColumn get characterName => text().named('characterName')();
+  TextColumn get avatarLocalPath =>
+      text().nullable().named('avatarLocalPath')();
   @override
   Set<Column> get primaryKey => {id};
 }
