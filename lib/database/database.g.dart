@@ -17,50 +17,88 @@ class $MessageTable extends Message with TableInfo<$MessageTable, MessageData> {
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _userUniqueIdMeta =
-      const VerificationMeta('userUniqueId');
+  static const VerificationMeta _conversationIdMeta =
+      const VerificationMeta('conversationId');
   @override
-  late final GeneratedColumn<String> userUniqueId = GeneratedColumn<String>(
-      'user_unique_id', aliasedName, false,
+  late final GeneratedColumn<String> conversationId = GeneratedColumn<String>(
+      'conversationId', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _characterIdMeta =
-      const VerificationMeta('characterId');
+  static const VerificationMeta _conversationTypeMeta =
+      const VerificationMeta('conversationType');
   @override
-  late final GeneratedColumn<int> characterId = GeneratedColumn<int>(
-      'character_id', aliasedName, false,
+  late final GeneratedColumn<int> conversationType = GeneratedColumn<int>(
+      'conversationType', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _userMessageMeta =
-      const VerificationMeta('userMessage');
+  static const VerificationMeta _fromIdMeta = const VerificationMeta('fromId');
   @override
-  late final GeneratedColumn<String> userMessage = GeneratedColumn<String>(
-      'user_message', aliasedName, false,
+  late final GeneratedColumn<String> fromId = GeneratedColumn<String>(
+      'fromId', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _aiMessageMeta =
-      const VerificationMeta('aiMessage');
+  static const VerificationMeta _fromTypeMeta =
+      const VerificationMeta('fromType');
   @override
-  late final GeneratedColumn<String> aiMessage = GeneratedColumn<String>(
-      'ai_message', aliasedName, false,
+  late final GeneratedColumn<String> fromType = GeneratedColumn<String>(
+      'fromType', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _timestatmpMeta =
-      const VerificationMeta('timestatmp');
+  static const VerificationMeta _msgMeta = const VerificationMeta('msg');
   @override
-  late final GeneratedColumn<DateTime> timestatmp = GeneratedColumn<DateTime>(
-      'timestatmp', aliasedName, false,
+  late final GeneratedColumn<String> msg = GeneratedColumn<String>(
+      'msg', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _msgIdMeta = const VerificationMeta('msgId');
+  @override
+  late final GeneratedColumn<String> msgId = GeneratedColumn<String>(
+      'msgId', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _msgTypeMeta =
+      const VerificationMeta('msgType');
+  @override
+  late final GeneratedColumn<String> msgType = GeneratedColumn<String>(
+      'msgType', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _msgMetadataMeta =
+      const VerificationMeta('msgMetadata');
+  @override
+  late final GeneratedColumn<String> msgMetadata = GeneratedColumn<String>(
+      'msgMetadata', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sendStatusMeta =
+      const VerificationMeta('sendStatus');
+  @override
+  late final GeneratedColumn<String> sendStatus = GeneratedColumn<String>(
+      'sendStatus', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _sendTimeMeta =
+      const VerificationMeta('sendTime');
+  @override
+  late final GeneratedColumn<DateTime> sendTime = GeneratedColumn<DateTime>(
+      'sendTime', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _gradeMeta = const VerificationMeta('grade');
+  static const VerificationMeta _toIdMeta = const VerificationMeta('toId');
   @override
-  late final GeneratedColumn<String> grade = GeneratedColumn<String>(
-      'grade', aliasedName, false,
+  late final GeneratedColumn<String> toId = GeneratedColumn<String>(
+      'toId', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _toTypeMeta = const VerificationMeta('toType');
+  @override
+  late final GeneratedColumn<String> toType = GeneratedColumn<String>(
+      'toType', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         id,
-        userUniqueId,
-        characterId,
-        userMessage,
-        aiMessage,
-        timestatmp,
-        grade
+        conversationId,
+        conversationType,
+        fromId,
+        fromType,
+        msg,
+        msgId,
+        msgType,
+        msgMetadata,
+        sendStatus,
+        sendTime,
+        toId,
+        toType
       ];
   @override
   String get aliasedName => _alias ?? 'message';
@@ -74,49 +112,83 @@ class $MessageTable extends Message with TableInfo<$MessageTable, MessageData> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('user_unique_id')) {
+    if (data.containsKey('conversationId')) {
       context.handle(
-          _userUniqueIdMeta,
-          userUniqueId.isAcceptableOrUnknown(
-              data['user_unique_id']!, _userUniqueIdMeta));
+          _conversationIdMeta,
+          conversationId.isAcceptableOrUnknown(
+              data['conversationId']!, _conversationIdMeta));
     } else if (isInserting) {
-      context.missing(_userUniqueIdMeta);
+      context.missing(_conversationIdMeta);
     }
-    if (data.containsKey('character_id')) {
+    if (data.containsKey('conversationType')) {
       context.handle(
-          _characterIdMeta,
-          characterId.isAcceptableOrUnknown(
-              data['character_id']!, _characterIdMeta));
+          _conversationTypeMeta,
+          conversationType.isAcceptableOrUnknown(
+              data['conversationType']!, _conversationTypeMeta));
     } else if (isInserting) {
-      context.missing(_characterIdMeta);
+      context.missing(_conversationTypeMeta);
     }
-    if (data.containsKey('user_message')) {
+    if (data.containsKey('fromId')) {
+      context.handle(_fromIdMeta,
+          fromId.isAcceptableOrUnknown(data['fromId']!, _fromIdMeta));
+    } else if (isInserting) {
+      context.missing(_fromIdMeta);
+    }
+    if (data.containsKey('fromType')) {
+      context.handle(_fromTypeMeta,
+          fromType.isAcceptableOrUnknown(data['fromType']!, _fromTypeMeta));
+    } else if (isInserting) {
+      context.missing(_fromTypeMeta);
+    }
+    if (data.containsKey('msg')) {
       context.handle(
-          _userMessageMeta,
-          userMessage.isAcceptableOrUnknown(
-              data['user_message']!, _userMessageMeta));
+          _msgMeta, msg.isAcceptableOrUnknown(data['msg']!, _msgMeta));
     } else if (isInserting) {
-      context.missing(_userMessageMeta);
+      context.missing(_msgMeta);
     }
-    if (data.containsKey('ai_message')) {
-      context.handle(_aiMessageMeta,
-          aiMessage.isAcceptableOrUnknown(data['ai_message']!, _aiMessageMeta));
-    } else if (isInserting) {
-      context.missing(_aiMessageMeta);
-    }
-    if (data.containsKey('timestatmp')) {
+    if (data.containsKey('msgId')) {
       context.handle(
-          _timestatmpMeta,
-          timestatmp.isAcceptableOrUnknown(
-              data['timestatmp']!, _timestatmpMeta));
+          _msgIdMeta, msgId.isAcceptableOrUnknown(data['msgId']!, _msgIdMeta));
     } else if (isInserting) {
-      context.missing(_timestatmpMeta);
+      context.missing(_msgIdMeta);
     }
-    if (data.containsKey('grade')) {
-      context.handle(
-          _gradeMeta, grade.isAcceptableOrUnknown(data['grade']!, _gradeMeta));
+    if (data.containsKey('msgType')) {
+      context.handle(_msgTypeMeta,
+          msgType.isAcceptableOrUnknown(data['msgType']!, _msgTypeMeta));
     } else if (isInserting) {
-      context.missing(_gradeMeta);
+      context.missing(_msgTypeMeta);
+    }
+    if (data.containsKey('msgMetadata')) {
+      context.handle(
+          _msgMetadataMeta,
+          msgMetadata.isAcceptableOrUnknown(
+              data['msgMetadata']!, _msgMetadataMeta));
+    } else if (isInserting) {
+      context.missing(_msgMetadataMeta);
+    }
+    if (data.containsKey('sendStatus')) {
+      context.handle(
+          _sendStatusMeta,
+          sendStatus.isAcceptableOrUnknown(
+              data['sendStatus']!, _sendStatusMeta));
+    }
+    if (data.containsKey('sendTime')) {
+      context.handle(_sendTimeMeta,
+          sendTime.isAcceptableOrUnknown(data['sendTime']!, _sendTimeMeta));
+    } else if (isInserting) {
+      context.missing(_sendTimeMeta);
+    }
+    if (data.containsKey('toId')) {
+      context.handle(
+          _toIdMeta, toId.isAcceptableOrUnknown(data['toId']!, _toIdMeta));
+    } else if (isInserting) {
+      context.missing(_toIdMeta);
+    }
+    if (data.containsKey('toType')) {
+      context.handle(_toTypeMeta,
+          toType.isAcceptableOrUnknown(data['toType']!, _toTypeMeta));
+    } else if (isInserting) {
+      context.missing(_toTypeMeta);
     }
     return context;
   }
@@ -129,18 +201,30 @@ class $MessageTable extends Message with TableInfo<$MessageTable, MessageData> {
     return MessageData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      userUniqueId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}user_unique_id'])!,
-      characterId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}character_id'])!,
-      userMessage: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}user_message'])!,
-      aiMessage: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}ai_message'])!,
-      timestatmp: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}timestatmp'])!,
-      grade: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}grade'])!,
+      conversationId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}conversationId'])!,
+      conversationType: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}conversationType'])!,
+      fromId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}fromId'])!,
+      fromType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}fromType'])!,
+      msg: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}msg'])!,
+      msgId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}msgId'])!,
+      msgType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}msgType'])!,
+      msgMetadata: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}msgMetadata'])!,
+      sendStatus: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}sendStatus']),
+      sendTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}sendTime'])!,
+      toId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}toId'])!,
+      toType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}toType'])!,
     );
   }
 
@@ -152,42 +236,70 @@ class $MessageTable extends Message with TableInfo<$MessageTable, MessageData> {
 
 class MessageData extends DataClass implements Insertable<MessageData> {
   final int id;
-  final String userUniqueId;
-  final int characterId;
-  final String userMessage;
-  final String aiMessage;
-  final DateTime timestatmp;
-  final String grade;
+  final String conversationId;
+  final int conversationType;
+  final String fromId;
+  final String fromType;
+  final String msg;
+  final String msgId;
+  final String msgType;
+  final String msgMetadata;
+  final String? sendStatus;
+  final DateTime sendTime;
+  final String toId;
+  final String toType;
   const MessageData(
       {required this.id,
-      required this.userUniqueId,
-      required this.characterId,
-      required this.userMessage,
-      required this.aiMessage,
-      required this.timestatmp,
-      required this.grade});
+      required this.conversationId,
+      required this.conversationType,
+      required this.fromId,
+      required this.fromType,
+      required this.msg,
+      required this.msgId,
+      required this.msgType,
+      required this.msgMetadata,
+      this.sendStatus,
+      required this.sendTime,
+      required this.toId,
+      required this.toType});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['user_unique_id'] = Variable<String>(userUniqueId);
-    map['character_id'] = Variable<int>(characterId);
-    map['user_message'] = Variable<String>(userMessage);
-    map['ai_message'] = Variable<String>(aiMessage);
-    map['timestatmp'] = Variable<DateTime>(timestatmp);
-    map['grade'] = Variable<String>(grade);
+    map['conversationId'] = Variable<String>(conversationId);
+    map['conversationType'] = Variable<int>(conversationType);
+    map['fromId'] = Variable<String>(fromId);
+    map['fromType'] = Variable<String>(fromType);
+    map['msg'] = Variable<String>(msg);
+    map['msgId'] = Variable<String>(msgId);
+    map['msgType'] = Variable<String>(msgType);
+    map['msgMetadata'] = Variable<String>(msgMetadata);
+    if (!nullToAbsent || sendStatus != null) {
+      map['sendStatus'] = Variable<String>(sendStatus);
+    }
+    map['sendTime'] = Variable<DateTime>(sendTime);
+    map['toId'] = Variable<String>(toId);
+    map['toType'] = Variable<String>(toType);
     return map;
   }
 
   MessageCompanion toCompanion(bool nullToAbsent) {
     return MessageCompanion(
       id: Value(id),
-      userUniqueId: Value(userUniqueId),
-      characterId: Value(characterId),
-      userMessage: Value(userMessage),
-      aiMessage: Value(aiMessage),
-      timestatmp: Value(timestatmp),
-      grade: Value(grade),
+      conversationId: Value(conversationId),
+      conversationType: Value(conversationType),
+      fromId: Value(fromId),
+      fromType: Value(fromType),
+      msg: Value(msg),
+      msgId: Value(msgId),
+      msgType: Value(msgType),
+      msgMetadata: Value(msgMetadata),
+      sendStatus: sendStatus == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sendStatus),
+      sendTime: Value(sendTime),
+      toId: Value(toId),
+      toType: Value(toType),
     );
   }
 
@@ -196,142 +308,242 @@ class MessageData extends DataClass implements Insertable<MessageData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return MessageData(
       id: serializer.fromJson<int>(json['id']),
-      userUniqueId: serializer.fromJson<String>(json['userUniqueId']),
-      characterId: serializer.fromJson<int>(json['characterId']),
-      userMessage: serializer.fromJson<String>(json['userMessage']),
-      aiMessage: serializer.fromJson<String>(json['aiMessage']),
-      timestatmp: serializer.fromJson<DateTime>(json['timestatmp']),
-      grade: serializer.fromJson<String>(json['grade']),
+      conversationId: serializer.fromJson<String>(json['conversationId']),
+      conversationType: serializer.fromJson<int>(json['conversationType']),
+      fromId: serializer.fromJson<String>(json['fromId']),
+      fromType: serializer.fromJson<String>(json['fromType']),
+      msg: serializer.fromJson<String>(json['msg']),
+      msgId: serializer.fromJson<String>(json['msgId']),
+      msgType: serializer.fromJson<String>(json['msgType']),
+      msgMetadata: serializer.fromJson<String>(json['msgMetadata']),
+      sendStatus: serializer.fromJson<String?>(json['sendStatus']),
+      sendTime: serializer.fromJson<DateTime>(json['sendTime']),
+      toId: serializer.fromJson<String>(json['toId']),
+      toType: serializer.fromJson<String>(json['toType']),
     );
   }
+  factory MessageData.fromJsonString(String encodedJson,
+          {ValueSerializer? serializer}) =>
+      MessageData.fromJson(
+          DataClass.parseJson(encodedJson) as Map<String, dynamic>,
+          serializer: serializer);
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'userUniqueId': serializer.toJson<String>(userUniqueId),
-      'characterId': serializer.toJson<int>(characterId),
-      'userMessage': serializer.toJson<String>(userMessage),
-      'aiMessage': serializer.toJson<String>(aiMessage),
-      'timestatmp': serializer.toJson<DateTime>(timestatmp),
-      'grade': serializer.toJson<String>(grade),
+      'conversationId': serializer.toJson<String>(conversationId),
+      'conversationType': serializer.toJson<int>(conversationType),
+      'fromId': serializer.toJson<String>(fromId),
+      'fromType': serializer.toJson<String>(fromType),
+      'msg': serializer.toJson<String>(msg),
+      'msgId': serializer.toJson<String>(msgId),
+      'msgType': serializer.toJson<String>(msgType),
+      'msgMetadata': serializer.toJson<String>(msgMetadata),
+      'sendStatus': serializer.toJson<String?>(sendStatus),
+      'sendTime': serializer.toJson<DateTime>(sendTime),
+      'toId': serializer.toJson<String>(toId),
+      'toType': serializer.toJson<String>(toType),
     };
   }
 
   MessageData copyWith(
           {int? id,
-          String? userUniqueId,
-          int? characterId,
-          String? userMessage,
-          String? aiMessage,
-          DateTime? timestatmp,
-          String? grade}) =>
+          String? conversationId,
+          int? conversationType,
+          String? fromId,
+          String? fromType,
+          String? msg,
+          String? msgId,
+          String? msgType,
+          String? msgMetadata,
+          Value<String?> sendStatus = const Value.absent(),
+          DateTime? sendTime,
+          String? toId,
+          String? toType}) =>
       MessageData(
         id: id ?? this.id,
-        userUniqueId: userUniqueId ?? this.userUniqueId,
-        characterId: characterId ?? this.characterId,
-        userMessage: userMessage ?? this.userMessage,
-        aiMessage: aiMessage ?? this.aiMessage,
-        timestatmp: timestatmp ?? this.timestatmp,
-        grade: grade ?? this.grade,
+        conversationId: conversationId ?? this.conversationId,
+        conversationType: conversationType ?? this.conversationType,
+        fromId: fromId ?? this.fromId,
+        fromType: fromType ?? this.fromType,
+        msg: msg ?? this.msg,
+        msgId: msgId ?? this.msgId,
+        msgType: msgType ?? this.msgType,
+        msgMetadata: msgMetadata ?? this.msgMetadata,
+        sendStatus: sendStatus.present ? sendStatus.value : this.sendStatus,
+        sendTime: sendTime ?? this.sendTime,
+        toId: toId ?? this.toId,
+        toType: toType ?? this.toType,
       );
   @override
   String toString() {
     return (StringBuffer('MessageData(')
           ..write('id: $id, ')
-          ..write('userUniqueId: $userUniqueId, ')
-          ..write('characterId: $characterId, ')
-          ..write('userMessage: $userMessage, ')
-          ..write('aiMessage: $aiMessage, ')
-          ..write('timestatmp: $timestatmp, ')
-          ..write('grade: $grade')
+          ..write('conversationId: $conversationId, ')
+          ..write('conversationType: $conversationType, ')
+          ..write('fromId: $fromId, ')
+          ..write('fromType: $fromType, ')
+          ..write('msg: $msg, ')
+          ..write('msgId: $msgId, ')
+          ..write('msgType: $msgType, ')
+          ..write('msgMetadata: $msgMetadata, ')
+          ..write('sendStatus: $sendStatus, ')
+          ..write('sendTime: $sendTime, ')
+          ..write('toId: $toId, ')
+          ..write('toType: $toType')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(
-      id, userUniqueId, characterId, userMessage, aiMessage, timestatmp, grade);
+      id,
+      conversationId,
+      conversationType,
+      fromId,
+      fromType,
+      msg,
+      msgId,
+      msgType,
+      msgMetadata,
+      sendStatus,
+      sendTime,
+      toId,
+      toType);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is MessageData &&
           other.id == this.id &&
-          other.userUniqueId == this.userUniqueId &&
-          other.characterId == this.characterId &&
-          other.userMessage == this.userMessage &&
-          other.aiMessage == this.aiMessage &&
-          other.timestatmp == this.timestatmp &&
-          other.grade == this.grade);
+          other.conversationId == this.conversationId &&
+          other.conversationType == this.conversationType &&
+          other.fromId == this.fromId &&
+          other.fromType == this.fromType &&
+          other.msg == this.msg &&
+          other.msgId == this.msgId &&
+          other.msgType == this.msgType &&
+          other.msgMetadata == this.msgMetadata &&
+          other.sendStatus == this.sendStatus &&
+          other.sendTime == this.sendTime &&
+          other.toId == this.toId &&
+          other.toType == this.toType);
 }
 
 class MessageCompanion extends UpdateCompanion<MessageData> {
   final Value<int> id;
-  final Value<String> userUniqueId;
-  final Value<int> characterId;
-  final Value<String> userMessage;
-  final Value<String> aiMessage;
-  final Value<DateTime> timestatmp;
-  final Value<String> grade;
+  final Value<String> conversationId;
+  final Value<int> conversationType;
+  final Value<String> fromId;
+  final Value<String> fromType;
+  final Value<String> msg;
+  final Value<String> msgId;
+  final Value<String> msgType;
+  final Value<String> msgMetadata;
+  final Value<String?> sendStatus;
+  final Value<DateTime> sendTime;
+  final Value<String> toId;
+  final Value<String> toType;
   const MessageCompanion({
     this.id = const Value.absent(),
-    this.userUniqueId = const Value.absent(),
-    this.characterId = const Value.absent(),
-    this.userMessage = const Value.absent(),
-    this.aiMessage = const Value.absent(),
-    this.timestatmp = const Value.absent(),
-    this.grade = const Value.absent(),
+    this.conversationId = const Value.absent(),
+    this.conversationType = const Value.absent(),
+    this.fromId = const Value.absent(),
+    this.fromType = const Value.absent(),
+    this.msg = const Value.absent(),
+    this.msgId = const Value.absent(),
+    this.msgType = const Value.absent(),
+    this.msgMetadata = const Value.absent(),
+    this.sendStatus = const Value.absent(),
+    this.sendTime = const Value.absent(),
+    this.toId = const Value.absent(),
+    this.toType = const Value.absent(),
   });
   MessageCompanion.insert({
     this.id = const Value.absent(),
-    required String userUniqueId,
-    required int characterId,
-    required String userMessage,
-    required String aiMessage,
-    required DateTime timestatmp,
-    required String grade,
-  })  : userUniqueId = Value(userUniqueId),
-        characterId = Value(characterId),
-        userMessage = Value(userMessage),
-        aiMessage = Value(aiMessage),
-        timestatmp = Value(timestatmp),
-        grade = Value(grade);
+    required String conversationId,
+    required int conversationType,
+    required String fromId,
+    required String fromType,
+    required String msg,
+    required String msgId,
+    required String msgType,
+    required String msgMetadata,
+    this.sendStatus = const Value.absent(),
+    required DateTime sendTime,
+    required String toId,
+    required String toType,
+  })  : conversationId = Value(conversationId),
+        conversationType = Value(conversationType),
+        fromId = Value(fromId),
+        fromType = Value(fromType),
+        msg = Value(msg),
+        msgId = Value(msgId),
+        msgType = Value(msgType),
+        msgMetadata = Value(msgMetadata),
+        sendTime = Value(sendTime),
+        toId = Value(toId),
+        toType = Value(toType);
   static Insertable<MessageData> custom({
     Expression<int>? id,
-    Expression<String>? userUniqueId,
-    Expression<int>? characterId,
-    Expression<String>? userMessage,
-    Expression<String>? aiMessage,
-    Expression<DateTime>? timestatmp,
-    Expression<String>? grade,
+    Expression<String>? conversationId,
+    Expression<int>? conversationType,
+    Expression<String>? fromId,
+    Expression<String>? fromType,
+    Expression<String>? msg,
+    Expression<String>? msgId,
+    Expression<String>? msgType,
+    Expression<String>? msgMetadata,
+    Expression<String>? sendStatus,
+    Expression<DateTime>? sendTime,
+    Expression<String>? toId,
+    Expression<String>? toType,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (userUniqueId != null) 'user_unique_id': userUniqueId,
-      if (characterId != null) 'character_id': characterId,
-      if (userMessage != null) 'user_message': userMessage,
-      if (aiMessage != null) 'ai_message': aiMessage,
-      if (timestatmp != null) 'timestatmp': timestatmp,
-      if (grade != null) 'grade': grade,
+      if (conversationId != null) 'conversationId': conversationId,
+      if (conversationType != null) 'conversationType': conversationType,
+      if (fromId != null) 'fromId': fromId,
+      if (fromType != null) 'fromType': fromType,
+      if (msg != null) 'msg': msg,
+      if (msgId != null) 'msgId': msgId,
+      if (msgType != null) 'msgType': msgType,
+      if (msgMetadata != null) 'msgMetadata': msgMetadata,
+      if (sendStatus != null) 'sendStatus': sendStatus,
+      if (sendTime != null) 'sendTime': sendTime,
+      if (toId != null) 'toId': toId,
+      if (toType != null) 'toType': toType,
     });
   }
 
   MessageCompanion copyWith(
       {Value<int>? id,
-      Value<String>? userUniqueId,
-      Value<int>? characterId,
-      Value<String>? userMessage,
-      Value<String>? aiMessage,
-      Value<DateTime>? timestatmp,
-      Value<String>? grade}) {
+      Value<String>? conversationId,
+      Value<int>? conversationType,
+      Value<String>? fromId,
+      Value<String>? fromType,
+      Value<String>? msg,
+      Value<String>? msgId,
+      Value<String>? msgType,
+      Value<String>? msgMetadata,
+      Value<String?>? sendStatus,
+      Value<DateTime>? sendTime,
+      Value<String>? toId,
+      Value<String>? toType}) {
     return MessageCompanion(
       id: id ?? this.id,
-      userUniqueId: userUniqueId ?? this.userUniqueId,
-      characterId: characterId ?? this.characterId,
-      userMessage: userMessage ?? this.userMessage,
-      aiMessage: aiMessage ?? this.aiMessage,
-      timestatmp: timestatmp ?? this.timestatmp,
-      grade: grade ?? this.grade,
+      conversationId: conversationId ?? this.conversationId,
+      conversationType: conversationType ?? this.conversationType,
+      fromId: fromId ?? this.fromId,
+      fromType: fromType ?? this.fromType,
+      msg: msg ?? this.msg,
+      msgId: msgId ?? this.msgId,
+      msgType: msgType ?? this.msgType,
+      msgMetadata: msgMetadata ?? this.msgMetadata,
+      sendStatus: sendStatus ?? this.sendStatus,
+      sendTime: sendTime ?? this.sendTime,
+      toId: toId ?? this.toId,
+      toType: toType ?? this.toType,
     );
   }
 
@@ -341,23 +553,41 @@ class MessageCompanion extends UpdateCompanion<MessageData> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (userUniqueId.present) {
-      map['user_unique_id'] = Variable<String>(userUniqueId.value);
+    if (conversationId.present) {
+      map['conversationId'] = Variable<String>(conversationId.value);
     }
-    if (characterId.present) {
-      map['character_id'] = Variable<int>(characterId.value);
+    if (conversationType.present) {
+      map['conversationType'] = Variable<int>(conversationType.value);
     }
-    if (userMessage.present) {
-      map['user_message'] = Variable<String>(userMessage.value);
+    if (fromId.present) {
+      map['fromId'] = Variable<String>(fromId.value);
     }
-    if (aiMessage.present) {
-      map['ai_message'] = Variable<String>(aiMessage.value);
+    if (fromType.present) {
+      map['fromType'] = Variable<String>(fromType.value);
     }
-    if (timestatmp.present) {
-      map['timestatmp'] = Variable<DateTime>(timestatmp.value);
+    if (msg.present) {
+      map['msg'] = Variable<String>(msg.value);
     }
-    if (grade.present) {
-      map['grade'] = Variable<String>(grade.value);
+    if (msgId.present) {
+      map['msgId'] = Variable<String>(msgId.value);
+    }
+    if (msgType.present) {
+      map['msgType'] = Variable<String>(msgType.value);
+    }
+    if (msgMetadata.present) {
+      map['msgMetadata'] = Variable<String>(msgMetadata.value);
+    }
+    if (sendStatus.present) {
+      map['sendStatus'] = Variable<String>(sendStatus.value);
+    }
+    if (sendTime.present) {
+      map['sendTime'] = Variable<DateTime>(sendTime.value);
+    }
+    if (toId.present) {
+      map['toId'] = Variable<String>(toId.value);
+    }
+    if (toType.present) {
+      map['toType'] = Variable<String>(toType.value);
     }
     return map;
   }
@@ -366,384 +596,29 @@ class MessageCompanion extends UpdateCompanion<MessageData> {
   String toString() {
     return (StringBuffer('MessageCompanion(')
           ..write('id: $id, ')
-          ..write('userUniqueId: $userUniqueId, ')
-          ..write('characterId: $characterId, ')
-          ..write('userMessage: $userMessage, ')
-          ..write('aiMessage: $aiMessage, ')
-          ..write('timestatmp: $timestatmp, ')
-          ..write('grade: $grade')
+          ..write('conversationId: $conversationId, ')
+          ..write('conversationType: $conversationType, ')
+          ..write('fromId: $fromId, ')
+          ..write('fromType: $fromType, ')
+          ..write('msg: $msg, ')
+          ..write('msgId: $msgId, ')
+          ..write('msgType: $msgType, ')
+          ..write('msgMetadata: $msgMetadata, ')
+          ..write('sendStatus: $sendStatus, ')
+          ..write('sendTime: $sendTime, ')
+          ..write('toId: $toId, ')
+          ..write('toType: $toType')
           ..write(')'))
         .toString();
   }
 }
 
-class $ChatItemTable extends ChatItem
-    with TableInfo<$ChatItemTable, ChatItemData> {
+class $CharacterTable extends Character
+    with TableInfo<$CharacterTable, CharacterData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ChatItemTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _avatarMeta = const VerificationMeta('avatar');
-  @override
-  late final GeneratedColumn<String> avatar = GeneratedColumn<String>(
-      'avatar', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _roleMeta = const VerificationMeta('role');
-  @override
-  late final GeneratedColumn<String> role = GeneratedColumn<String>(
-      'role', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _lastMsgMeta =
-      const VerificationMeta('lastMsg');
-  @override
-  late final GeneratedColumn<String> lastMsg = GeneratedColumn<String>(
-      'lastMsg', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _dateMeta = const VerificationMeta('date');
-  @override
-  late final GeneratedColumn<String> date = GeneratedColumn<String>(
-      'date', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _characterNameMeta =
-      const VerificationMeta('characterName');
-  @override
-  late final GeneratedColumn<String> characterName = GeneratedColumn<String>(
-      'characterName', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _avatarLocalPathMeta =
-      const VerificationMeta('avatarLocalPath');
-  @override
-  late final GeneratedColumn<String> avatarLocalPath = GeneratedColumn<String>(
-      'avatarLocalPath', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, avatar, role, lastMsg, date, characterName, avatarLocalPath];
-  @override
-  String get aliasedName => _alias ?? 'chat_item';
-  @override
-  String get actualTableName => 'chat_item';
-  @override
-  VerificationContext validateIntegrity(Insertable<ChatItemData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('avatar')) {
-      context.handle(_avatarMeta,
-          avatar.isAcceptableOrUnknown(data['avatar']!, _avatarMeta));
-    } else if (isInserting) {
-      context.missing(_avatarMeta);
-    }
-    if (data.containsKey('role')) {
-      context.handle(
-          _roleMeta, role.isAcceptableOrUnknown(data['role']!, _roleMeta));
-    } else if (isInserting) {
-      context.missing(_roleMeta);
-    }
-    if (data.containsKey('lastMsg')) {
-      context.handle(_lastMsgMeta,
-          lastMsg.isAcceptableOrUnknown(data['lastMsg']!, _lastMsgMeta));
-    } else if (isInserting) {
-      context.missing(_lastMsgMeta);
-    }
-    if (data.containsKey('date')) {
-      context.handle(
-          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
-    } else if (isInserting) {
-      context.missing(_dateMeta);
-    }
-    if (data.containsKey('characterName')) {
-      context.handle(
-          _characterNameMeta,
-          characterName.isAcceptableOrUnknown(
-              data['characterName']!, _characterNameMeta));
-    } else if (isInserting) {
-      context.missing(_characterNameMeta);
-    }
-    if (data.containsKey('avatarLocalPath')) {
-      context.handle(
-          _avatarLocalPathMeta,
-          avatarLocalPath.isAcceptableOrUnknown(
-              data['avatarLocalPath']!, _avatarLocalPathMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  ChatItemData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ChatItemData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      avatar: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}avatar'])!,
-      role: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}role'])!,
-      lastMsg: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}lastMsg'])!,
-      date: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}date'])!,
-      characterName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}characterName'])!,
-      avatarLocalPath: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}avatarLocalPath']),
-    );
-  }
-
-  @override
-  $ChatItemTable createAlias(String alias) {
-    return $ChatItemTable(attachedDatabase, alias);
-  }
-}
-
-class ChatItemData extends DataClass implements Insertable<ChatItemData> {
-  final int id;
-  final String avatar;
-  final String role;
-  final String lastMsg;
-  final String date;
-  final String characterName;
-  final String? avatarLocalPath;
-  const ChatItemData(
-      {required this.id,
-      required this.avatar,
-      required this.role,
-      required this.lastMsg,
-      required this.date,
-      required this.characterName,
-      this.avatarLocalPath});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['avatar'] = Variable<String>(avatar);
-    map['role'] = Variable<String>(role);
-    map['lastMsg'] = Variable<String>(lastMsg);
-    map['date'] = Variable<String>(date);
-    map['characterName'] = Variable<String>(characterName);
-    if (!nullToAbsent || avatarLocalPath != null) {
-      map['avatarLocalPath'] = Variable<String>(avatarLocalPath);
-    }
-    return map;
-  }
-
-  ChatItemCompanion toCompanion(bool nullToAbsent) {
-    return ChatItemCompanion(
-      id: Value(id),
-      avatar: Value(avatar),
-      role: Value(role),
-      lastMsg: Value(lastMsg),
-      date: Value(date),
-      characterName: Value(characterName),
-      avatarLocalPath: avatarLocalPath == null && nullToAbsent
-          ? const Value.absent()
-          : Value(avatarLocalPath),
-    );
-  }
-
-  factory ChatItemData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ChatItemData(
-      id: serializer.fromJson<int>(json['id']),
-      avatar: serializer.fromJson<String>(json['avatar']),
-      role: serializer.fromJson<String>(json['role']),
-      lastMsg: serializer.fromJson<String>(json['lastMsg']),
-      date: serializer.fromJson<String>(json['date']),
-      characterName: serializer.fromJson<String>(json['characterName']),
-      avatarLocalPath: serializer.fromJson<String?>(json['avatarLocalPath']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'avatar': serializer.toJson<String>(avatar),
-      'role': serializer.toJson<String>(role),
-      'lastMsg': serializer.toJson<String>(lastMsg),
-      'date': serializer.toJson<String>(date),
-      'characterName': serializer.toJson<String>(characterName),
-      'avatarLocalPath': serializer.toJson<String?>(avatarLocalPath),
-    };
-  }
-
-  ChatItemData copyWith(
-          {int? id,
-          String? avatar,
-          String? role,
-          String? lastMsg,
-          String? date,
-          String? characterName,
-          Value<String?> avatarLocalPath = const Value.absent()}) =>
-      ChatItemData(
-        id: id ?? this.id,
-        avatar: avatar ?? this.avatar,
-        role: role ?? this.role,
-        lastMsg: lastMsg ?? this.lastMsg,
-        date: date ?? this.date,
-        characterName: characterName ?? this.characterName,
-        avatarLocalPath: avatarLocalPath.present
-            ? avatarLocalPath.value
-            : this.avatarLocalPath,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('ChatItemData(')
-          ..write('id: $id, ')
-          ..write('avatar: $avatar, ')
-          ..write('role: $role, ')
-          ..write('lastMsg: $lastMsg, ')
-          ..write('date: $date, ')
-          ..write('characterName: $characterName, ')
-          ..write('avatarLocalPath: $avatarLocalPath')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      id, avatar, role, lastMsg, date, characterName, avatarLocalPath);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ChatItemData &&
-          other.id == this.id &&
-          other.avatar == this.avatar &&
-          other.role == this.role &&
-          other.lastMsg == this.lastMsg &&
-          other.date == this.date &&
-          other.characterName == this.characterName &&
-          other.avatarLocalPath == this.avatarLocalPath);
-}
-
-class ChatItemCompanion extends UpdateCompanion<ChatItemData> {
-  final Value<int> id;
-  final Value<String> avatar;
-  final Value<String> role;
-  final Value<String> lastMsg;
-  final Value<String> date;
-  final Value<String> characterName;
-  final Value<String?> avatarLocalPath;
-  const ChatItemCompanion({
-    this.id = const Value.absent(),
-    this.avatar = const Value.absent(),
-    this.role = const Value.absent(),
-    this.lastMsg = const Value.absent(),
-    this.date = const Value.absent(),
-    this.characterName = const Value.absent(),
-    this.avatarLocalPath = const Value.absent(),
-  });
-  ChatItemCompanion.insert({
-    this.id = const Value.absent(),
-    required String avatar,
-    required String role,
-    required String lastMsg,
-    required String date,
-    required String characterName,
-    this.avatarLocalPath = const Value.absent(),
-  })  : avatar = Value(avatar),
-        role = Value(role),
-        lastMsg = Value(lastMsg),
-        date = Value(date),
-        characterName = Value(characterName);
-  static Insertable<ChatItemData> custom({
-    Expression<int>? id,
-    Expression<String>? avatar,
-    Expression<String>? role,
-    Expression<String>? lastMsg,
-    Expression<String>? date,
-    Expression<String>? characterName,
-    Expression<String>? avatarLocalPath,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (avatar != null) 'avatar': avatar,
-      if (role != null) 'role': role,
-      if (lastMsg != null) 'lastMsg': lastMsg,
-      if (date != null) 'date': date,
-      if (characterName != null) 'characterName': characterName,
-      if (avatarLocalPath != null) 'avatarLocalPath': avatarLocalPath,
-    });
-  }
-
-  ChatItemCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? avatar,
-      Value<String>? role,
-      Value<String>? lastMsg,
-      Value<String>? date,
-      Value<String>? characterName,
-      Value<String?>? avatarLocalPath}) {
-    return ChatItemCompanion(
-      id: id ?? this.id,
-      avatar: avatar ?? this.avatar,
-      role: role ?? this.role,
-      lastMsg: lastMsg ?? this.lastMsg,
-      date: date ?? this.date,
-      characterName: characterName ?? this.characterName,
-      avatarLocalPath: avatarLocalPath ?? this.avatarLocalPath,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (avatar.present) {
-      map['avatar'] = Variable<String>(avatar.value);
-    }
-    if (role.present) {
-      map['role'] = Variable<String>(role.value);
-    }
-    if (lastMsg.present) {
-      map['lastMsg'] = Variable<String>(lastMsg.value);
-    }
-    if (date.present) {
-      map['date'] = Variable<String>(date.value);
-    }
-    if (characterName.present) {
-      map['characterName'] = Variable<String>(characterName.value);
-    }
-    if (avatarLocalPath.present) {
-      map['avatarLocalPath'] = Variable<String>(avatarLocalPath.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ChatItemCompanion(')
-          ..write('id: $id, ')
-          ..write('avatar: $avatar, ')
-          ..write('role: $role, ')
-          ..write('lastMsg: $lastMsg, ')
-          ..write('date: $date, ')
-          ..write('characterName: $characterName, ')
-          ..write('avatarLocalPath: $avatarLocalPath')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $CharactersTable extends Characters
-    with TableInfo<$CharactersTable, Character> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $CharactersTable(this.attachedDatabase, [this._alias]);
+  $CharacterTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -909,11 +784,11 @@ class $CharactersTable extends Characters
         frequentLocations
       ];
   @override
-  String get aliasedName => _alias ?? 'characters';
+  String get aliasedName => _alias ?? 'character';
   @override
-  String get actualTableName => 'characters';
+  String get actualTableName => 'character';
   @override
-  VerificationContext validateIntegrity(Insertable<Character> instance,
+  VerificationContext validateIntegrity(Insertable<CharacterData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -1044,9 +919,9 @@ class $CharactersTable extends Characters
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Character map(Map<String, dynamic> data, {String? tablePrefix}) {
+  CharacterData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Character(
+    return CharacterData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       userUniqueId: attachedDatabase.typeMapping
@@ -1097,12 +972,12 @@ class $CharactersTable extends Characters
   }
 
   @override
-  $CharactersTable createAlias(String alias) {
-    return $CharactersTable(attachedDatabase, alias);
+  $CharacterTable createAlias(String alias) {
+    return $CharacterTable(attachedDatabase, alias);
   }
 }
 
-class Character extends DataClass implements Insertable<Character> {
+class CharacterData extends DataClass implements Insertable<CharacterData> {
   final int id;
 
   /// 用户唯一id
@@ -1170,7 +1045,7 @@ class Character extends DataClass implements Insertable<Character> {
 
   ///常去地点
   final String? frequentLocations;
-  const Character(
+  const CharacterData(
       {required this.id,
       required this.userUniqueId,
       required this.characterName,
@@ -1259,8 +1134,8 @@ class Character extends DataClass implements Insertable<Character> {
     return map;
   }
 
-  CharactersCompanion toCompanion(bool nullToAbsent) {
-    return CharactersCompanion(
+  CharacterCompanion toCompanion(bool nullToAbsent) {
+    return CharacterCompanion(
       id: Value(id),
       userUniqueId: Value(userUniqueId),
       characterName: Value(characterName),
@@ -1319,10 +1194,10 @@ class Character extends DataClass implements Insertable<Character> {
     );
   }
 
-  factory Character.fromJson(Map<String, dynamic> json,
+  factory CharacterData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Character(
+    return CharacterData(
       id: serializer.fromJson<int>(json['id']),
       userUniqueId: serializer.fromJson<String>(json['userUniqueId']),
       characterName: serializer.fromJson<String>(json['characterName']),
@@ -1350,6 +1225,11 @@ class Character extends DataClass implements Insertable<Character> {
           serializer.fromJson<String?>(json['frequentLocations']),
     );
   }
+  factory CharacterData.fromJsonString(String encodedJson,
+          {ValueSerializer? serializer}) =>
+      CharacterData.fromJson(
+          DataClass.parseJson(encodedJson) as Map<String, dynamic>,
+          serializer: serializer);
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
@@ -1380,7 +1260,7 @@ class Character extends DataClass implements Insertable<Character> {
     };
   }
 
-  Character copyWith(
+  CharacterData copyWith(
           {int? id,
           String? userUniqueId,
           String? characterName,
@@ -1404,7 +1284,7 @@ class Character extends DataClass implements Insertable<Character> {
           Value<String?> economicConditions = const Value.absent(),
           Value<String?> interests = const Value.absent(),
           Value<String?> frequentLocations = const Value.absent()}) =>
-      Character(
+      CharacterData(
         id: id ?? this.id,
         userUniqueId: userUniqueId ?? this.userUniqueId,
         characterName: characterName ?? this.characterName,
@@ -1438,7 +1318,7 @@ class Character extends DataClass implements Insertable<Character> {
       );
   @override
   String toString() {
-    return (StringBuffer('Character(')
+    return (StringBuffer('CharacterData(')
           ..write('id: $id, ')
           ..write('userUniqueId: $userUniqueId, ')
           ..write('characterName: $characterName, ')
@@ -1495,7 +1375,7 @@ class Character extends DataClass implements Insertable<Character> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Character &&
+      (other is CharacterData &&
           other.id == this.id &&
           other.userUniqueId == this.userUniqueId &&
           other.characterName == this.characterName &&
@@ -1521,7 +1401,7 @@ class Character extends DataClass implements Insertable<Character> {
           other.frequentLocations == this.frequentLocations);
 }
 
-class CharactersCompanion extends UpdateCompanion<Character> {
+class CharacterCompanion extends UpdateCompanion<CharacterData> {
   final Value<int> id;
   final Value<String> userUniqueId;
   final Value<String> characterName;
@@ -1545,7 +1425,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
   final Value<String?> economicConditions;
   final Value<String?> interests;
   final Value<String?> frequentLocations;
-  const CharactersCompanion({
+  const CharacterCompanion({
     this.id = const Value.absent(),
     this.userUniqueId = const Value.absent(),
     this.characterName = const Value.absent(),
@@ -1570,7 +1450,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
     this.interests = const Value.absent(),
     this.frequentLocations = const Value.absent(),
   });
-  CharactersCompanion.insert({
+  CharacterCompanion.insert({
     this.id = const Value.absent(),
     required String userUniqueId,
     required String characterName,
@@ -1597,7 +1477,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
   })  : userUniqueId = Value(userUniqueId),
         characterName = Value(characterName),
         prompt = Value(prompt);
-  static Insertable<Character> custom({
+  static Insertable<CharacterData> custom({
     Expression<int>? id,
     Expression<String>? userUniqueId,
     Expression<String>? characterName,
@@ -1649,7 +1529,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
     });
   }
 
-  CharactersCompanion copyWith(
+  CharacterCompanion copyWith(
       {Value<int>? id,
       Value<String>? userUniqueId,
       Value<String>? characterName,
@@ -1673,7 +1553,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
       Value<String?>? economicConditions,
       Value<String?>? interests,
       Value<String?>? frequentLocations}) {
-    return CharactersCompanion(
+    return CharacterCompanion(
       id: id ?? this.id,
       userUniqueId: userUniqueId ?? this.userUniqueId,
       characterName: characterName ?? this.characterName,
@@ -1777,7 +1657,7 @@ class CharactersCompanion extends UpdateCompanion<Character> {
 
   @override
   String toString() {
-    return (StringBuffer('CharactersCompanion(')
+    return (StringBuffer('CharacterCompanion(')
           ..write('id: $id, ')
           ..write('userUniqueId: $userUniqueId, ')
           ..write('characterName: $characterName, ')
@@ -1806,12 +1686,12 @@ class CharactersCompanion extends UpdateCompanion<Character> {
   }
 }
 
-class $ChatHistoryTable extends ChatHistory
-    with TableInfo<$ChatHistoryTable, ChatHistoryData> {
+class $ConversationTable extends Conversation
+    with TableInfo<$ConversationTable, ConversationData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ChatHistoryTable(this.attachedDatabase, [this._alias]);
+  $ConversationTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -1821,199 +1701,216 @@ class $ChatHistoryTable extends ChatHistory
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _msgIdMeta = const VerificationMeta('msgId');
+  static const VerificationMeta _conversationIdMeta =
+      const VerificationMeta('conversationId');
   @override
-  late final GeneratedColumn<String> msgId = GeneratedColumn<String>(
-      'msg_id', aliasedName, false,
+  late final GeneratedColumn<String> conversationId = GeneratedColumn<String>(
+      'conversationId', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _fromMeta = const VerificationMeta('from');
+  static const VerificationMeta _conversationTypeMeta =
+      const VerificationMeta('conversationType');
   @override
-  late final GeneratedColumn<String> from = GeneratedColumn<String>(
-      'from', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _fromAvatarMeta =
-      const VerificationMeta('fromAvatar');
-  @override
-  late final GeneratedColumn<String> fromAvatar = GeneratedColumn<String>(
-      'from_avatar', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _fromNameMeta =
-      const VerificationMeta('fromName');
-  @override
-  late final GeneratedColumn<String> fromName = GeneratedColumn<String>(
-      'from_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _toMeta = const VerificationMeta('to');
-  @override
-  late final GeneratedColumn<String> to = GeneratedColumn<String>(
-      'to', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _toAvatarMeta =
-      const VerificationMeta('toAvatar');
-  @override
-  late final GeneratedColumn<String> toAvatar = GeneratedColumn<String>(
-      'to_avatar', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _toNameMeta = const VerificationMeta('toName');
-  @override
-  late final GeneratedColumn<String> toName = GeneratedColumn<String>(
-      'to_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _chatTypeMeta =
-      const VerificationMeta('chatType');
-  @override
-  late final GeneratedColumn<int> chatType = GeneratedColumn<int>(
-      'chat_type', aliasedName, false,
+  late final GeneratedColumn<int> conversationType = GeneratedColumn<int>(
+      'conversationType', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _msgTypeMeta =
-      const VerificationMeta('msgType');
+  static const VerificationMeta _memberIdMeta =
+      const VerificationMeta('memberId');
   @override
-  late final GeneratedColumn<int> msgType = GeneratedColumn<int>(
-      'msg_type', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
-  static const VerificationMeta _msgMeta = const VerificationMeta('msg');
-  @override
-  late final GeneratedColumn<String> msg = GeneratedColumn<String>(
-      'msg', aliasedName, false,
+  late final GeneratedColumn<String> memberId = GeneratedColumn<String>(
+      'memberId', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _msgInfoMeta =
-      const VerificationMeta('msgInfo');
+  static const VerificationMeta _memberTypeMeta =
+      const VerificationMeta('memberType');
   @override
-  late final GeneratedColumn<String> msgInfo = GeneratedColumn<String>(
-      'msg_info', aliasedName, true,
+  late final GeneratedColumn<int> memberType = GeneratedColumn<int>(
+      'memberType', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
+      'userId', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nicknameMeta =
+      const VerificationMeta('nickname');
+  @override
+  late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
+      'nickname', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _sendTimeMeta =
-      const VerificationMeta('sendTime');
+  static const VerificationMeta _avatarPathMeta =
+      const VerificationMeta('avatarPath');
   @override
-  late final GeneratedColumn<DateTime> sendTime = GeneratedColumn<DateTime>(
-      'send_time', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _sendStatusMeta =
-      const VerificationMeta('sendStatus');
+  late final GeneratedColumn<String> avatarPath = GeneratedColumn<String>(
+      'avatarPath', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _backgroundPathMeta =
+      const VerificationMeta('backgroundPath');
   @override
-  late final GeneratedColumn<int> sendStatus = GeneratedColumn<int>(
-      'send_status', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _sessionIdMeta =
-      const VerificationMeta('sessionId');
+  late final GeneratedColumn<String> backgroundPath = GeneratedColumn<String>(
+      'backgroundPath', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _characterNameMeta =
+      const VerificationMeta('characterName');
   @override
-  late final GeneratedColumn<int> sessionId = GeneratedColumn<int>(
-      'session_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+  late final GeneratedColumn<String> characterName = GeneratedColumn<String>(
+      'characterName', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _toIdMeta = const VerificationMeta('toId');
+  @override
+  late final GeneratedColumn<String> toId = GeneratedColumn<String>(
+      'toId', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _toUserNameMeta =
+      const VerificationMeta('toUserName');
+  @override
+  late final GeneratedColumn<String> toUserName = GeneratedColumn<String>(
+      'toUserName', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _toAvatarPathMeta =
+      const VerificationMeta('toAvatarPath');
+  @override
+  late final GeneratedColumn<String> toAvatarPath = GeneratedColumn<String>(
+      'toAvatarPath', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _lastMsgMeta =
+      const VerificationMeta('lastMsg');
+  @override
+  late final GeneratedColumn<String> lastMsg = GeneratedColumn<String>(
+      'lastMsg', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _lastMsgTypeMeta =
+      const VerificationMeta('lastMsgType');
+  @override
+  late final GeneratedColumn<String> lastMsgType = GeneratedColumn<String>(
+      'lastMsgType', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _latestTimeMeta =
+      const VerificationMeta('latestTime');
+  @override
+  late final GeneratedColumn<String> latestTime = GeneratedColumn<String>(
+      'latestTime', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         id,
-        msgId,
-        from,
-        fromAvatar,
-        fromName,
-        to,
-        toAvatar,
-        toName,
-        chatType,
-        msgType,
-        msg,
-        msgInfo,
-        sendTime,
-        sendStatus,
-        sessionId
+        conversationId,
+        conversationType,
+        memberId,
+        memberType,
+        userId,
+        nickname,
+        avatarPath,
+        backgroundPath,
+        characterName,
+        toId,
+        toUserName,
+        toAvatarPath,
+        lastMsg,
+        lastMsgType,
+        latestTime
       ];
   @override
-  String get aliasedName => _alias ?? 'chat_history';
+  String get aliasedName => _alias ?? 'conversation';
   @override
-  String get actualTableName => 'chat_history';
+  String get actualTableName => 'conversation';
   @override
-  VerificationContext validateIntegrity(Insertable<ChatHistoryData> instance,
+  VerificationContext validateIntegrity(Insertable<ConversationData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('msg_id')) {
+    if (data.containsKey('conversationId')) {
       context.handle(
-          _msgIdMeta, msgId.isAcceptableOrUnknown(data['msg_id']!, _msgIdMeta));
+          _conversationIdMeta,
+          conversationId.isAcceptableOrUnknown(
+              data['conversationId']!, _conversationIdMeta));
     } else if (isInserting) {
-      context.missing(_msgIdMeta);
+      context.missing(_conversationIdMeta);
     }
-    if (data.containsKey('from')) {
+    if (data.containsKey('conversationType')) {
       context.handle(
-          _fromMeta, from.isAcceptableOrUnknown(data['from']!, _fromMeta));
+          _conversationTypeMeta,
+          conversationType.isAcceptableOrUnknown(
+              data['conversationType']!, _conversationTypeMeta));
     } else if (isInserting) {
-      context.missing(_fromMeta);
+      context.missing(_conversationTypeMeta);
     }
-    if (data.containsKey('from_avatar')) {
+    if (data.containsKey('memberId')) {
+      context.handle(_memberIdMeta,
+          memberId.isAcceptableOrUnknown(data['memberId']!, _memberIdMeta));
+    } else if (isInserting) {
+      context.missing(_memberIdMeta);
+    }
+    if (data.containsKey('memberType')) {
       context.handle(
-          _fromAvatarMeta,
-          fromAvatar.isAcceptableOrUnknown(
-              data['from_avatar']!, _fromAvatarMeta));
+          _memberTypeMeta,
+          memberType.isAcceptableOrUnknown(
+              data['memberType']!, _memberTypeMeta));
     } else if (isInserting) {
-      context.missing(_fromAvatarMeta);
+      context.missing(_memberTypeMeta);
     }
-    if (data.containsKey('from_name')) {
-      context.handle(_fromNameMeta,
-          fromName.isAcceptableOrUnknown(data['from_name']!, _fromNameMeta));
+    if (data.containsKey('userId')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['userId']!, _userIdMeta));
     } else if (isInserting) {
-      context.missing(_fromNameMeta);
+      context.missing(_userIdMeta);
     }
-    if (data.containsKey('to')) {
-      context.handle(_toMeta, to.isAcceptableOrUnknown(data['to']!, _toMeta));
-    } else if (isInserting) {
-      context.missing(_toMeta);
+    if (data.containsKey('nickname')) {
+      context.handle(_nicknameMeta,
+          nickname.isAcceptableOrUnknown(data['nickname']!, _nicknameMeta));
     }
-    if (data.containsKey('to_avatar')) {
-      context.handle(_toAvatarMeta,
-          toAvatar.isAcceptableOrUnknown(data['to_avatar']!, _toAvatarMeta));
-    } else if (isInserting) {
-      context.missing(_toAvatarMeta);
-    }
-    if (data.containsKey('to_name')) {
-      context.handle(_toNameMeta,
-          toName.isAcceptableOrUnknown(data['to_name']!, _toNameMeta));
-    } else if (isInserting) {
-      context.missing(_toNameMeta);
-    }
-    if (data.containsKey('chat_type')) {
-      context.handle(_chatTypeMeta,
-          chatType.isAcceptableOrUnknown(data['chat_type']!, _chatTypeMeta));
-    } else if (isInserting) {
-      context.missing(_chatTypeMeta);
-    }
-    if (data.containsKey('msg_type')) {
-      context.handle(_msgTypeMeta,
-          msgType.isAcceptableOrUnknown(data['msg_type']!, _msgTypeMeta));
-    }
-    if (data.containsKey('msg')) {
+    if (data.containsKey('avatarPath')) {
       context.handle(
-          _msgMeta, msg.isAcceptableOrUnknown(data['msg']!, _msgMeta));
-    } else if (isInserting) {
-      context.missing(_msgMeta);
+          _avatarPathMeta,
+          avatarPath.isAcceptableOrUnknown(
+              data['avatarPath']!, _avatarPathMeta));
     }
-    if (data.containsKey('msg_info')) {
-      context.handle(_msgInfoMeta,
-          msgInfo.isAcceptableOrUnknown(data['msg_info']!, _msgInfoMeta));
-    }
-    if (data.containsKey('send_time')) {
-      context.handle(_sendTimeMeta,
-          sendTime.isAcceptableOrUnknown(data['send_time']!, _sendTimeMeta));
-    } else if (isInserting) {
-      context.missing(_sendTimeMeta);
-    }
-    if (data.containsKey('send_status')) {
+    if (data.containsKey('backgroundPath')) {
       context.handle(
-          _sendStatusMeta,
-          sendStatus.isAcceptableOrUnknown(
-              data['send_status']!, _sendStatusMeta));
-    } else if (isInserting) {
-      context.missing(_sendStatusMeta);
+          _backgroundPathMeta,
+          backgroundPath.isAcceptableOrUnknown(
+              data['backgroundPath']!, _backgroundPathMeta));
     }
-    if (data.containsKey('session_id')) {
-      context.handle(_sessionIdMeta,
-          sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta));
+    if (data.containsKey('characterName')) {
+      context.handle(
+          _characterNameMeta,
+          characterName.isAcceptableOrUnknown(
+              data['characterName']!, _characterNameMeta));
+    }
+    if (data.containsKey('toId')) {
+      context.handle(
+          _toIdMeta, toId.isAcceptableOrUnknown(data['toId']!, _toIdMeta));
+    }
+    if (data.containsKey('toUserName')) {
+      context.handle(
+          _toUserNameMeta,
+          toUserName.isAcceptableOrUnknown(
+              data['toUserName']!, _toUserNameMeta));
+    }
+    if (data.containsKey('toAvatarPath')) {
+      context.handle(
+          _toAvatarPathMeta,
+          toAvatarPath.isAcceptableOrUnknown(
+              data['toAvatarPath']!, _toAvatarPathMeta));
+    }
+    if (data.containsKey('lastMsg')) {
+      context.handle(_lastMsgMeta,
+          lastMsg.isAcceptableOrUnknown(data['lastMsg']!, _lastMsgMeta));
+    }
+    if (data.containsKey('lastMsgType')) {
+      context.handle(
+          _lastMsgTypeMeta,
+          lastMsgType.isAcceptableOrUnknown(
+              data['lastMsgType']!, _lastMsgTypeMeta));
+    }
+    if (data.containsKey('latestTime')) {
+      context.handle(
+          _latestTimeMeta,
+          latestTime.isAcceptableOrUnknown(
+              data['latestTime']!, _latestTimeMeta));
     } else if (isInserting) {
-      context.missing(_sessionIdMeta);
+      context.missing(_latestTimeMeta);
     }
     return context;
   }
@@ -2021,244 +1918,270 @@ class $ChatHistoryTable extends ChatHistory
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ChatHistoryData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  ConversationData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ChatHistoryData(
+    return ConversationData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      msgId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}msg_id'])!,
-      from: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}from'])!,
-      fromAvatar: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}from_avatar'])!,
-      fromName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}from_name'])!,
-      to: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}to'])!,
-      toAvatar: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}to_avatar'])!,
-      toName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}to_name'])!,
-      chatType: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}chat_type'])!,
-      msgType: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}msg_type'])!,
-      msg: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}msg'])!,
-      msgInfo: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}msg_info']),
-      sendTime: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}send_time'])!,
-      sendStatus: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}send_status'])!,
-      sessionId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}session_id'])!,
+      conversationId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}conversationId'])!,
+      conversationType: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}conversationType'])!,
+      memberId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}memberId'])!,
+      memberType: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}memberType'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}userId'])!,
+      nickname: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}nickname']),
+      avatarPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}avatarPath']),
+      backgroundPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}backgroundPath']),
+      characterName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}characterName']),
+      toId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}toId']),
+      toUserName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}toUserName']),
+      toAvatarPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}toAvatarPath']),
+      lastMsg: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lastMsg']),
+      lastMsgType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lastMsgType']),
+      latestTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}latestTime'])!,
     );
   }
 
   @override
-  $ChatHistoryTable createAlias(String alias) {
-    return $ChatHistoryTable(attachedDatabase, alias);
+  $ConversationTable createAlias(String alias) {
+    return $ConversationTable(attachedDatabase, alias);
   }
 }
 
-class ChatHistoryData extends DataClass implements Insertable<ChatHistoryData> {
+class ConversationData extends DataClass
+    implements Insertable<ConversationData> {
   /// 自增id
   final int id;
-
-  /// 消息id
-  final String msgId;
-  final String from;
-
-  /// 发送者头像
-  final String fromAvatar;
-
-  /// 发送者名称
-  final String fromName;
-
-  /// 接收者
-  final String to;
-
-  /// 接收者头像
-  final String toAvatar;
-
-  /// 接收者名称
-  final String toName;
-  final int chatType;
-
-  /// 0: text, 1: image, 2: audio, 3: video, 4: file, 5: location, 6: contact, 7: link, 8: system
-  final int msgType;
-
-  /// 消息内容
-  final String msg;
-
-  /// 非文本消息内容
-  final String? msgInfo;
-
-  ///发送时间
-  final DateTime sendTime;
-
-  ///发送状态
-  final int sendStatus;
-
-  ///会话id
-  final int sessionId;
-  const ChatHistoryData(
+  final String conversationId;
+  final int conversationType;
+  final String memberId;
+  final int memberType;
+  final String userId;
+  final String? nickname;
+  final String? avatarPath;
+  final String? backgroundPath;
+  final String? characterName;
+  final String? toId;
+  final String? toUserName;
+  final String? toAvatarPath;
+  final String? lastMsg;
+  final String? lastMsgType;
+  final String latestTime;
+  const ConversationData(
       {required this.id,
-      required this.msgId,
-      required this.from,
-      required this.fromAvatar,
-      required this.fromName,
-      required this.to,
-      required this.toAvatar,
-      required this.toName,
-      required this.chatType,
-      required this.msgType,
-      required this.msg,
-      this.msgInfo,
-      required this.sendTime,
-      required this.sendStatus,
-      required this.sessionId});
+      required this.conversationId,
+      required this.conversationType,
+      required this.memberId,
+      required this.memberType,
+      required this.userId,
+      this.nickname,
+      this.avatarPath,
+      this.backgroundPath,
+      this.characterName,
+      this.toId,
+      this.toUserName,
+      this.toAvatarPath,
+      this.lastMsg,
+      this.lastMsgType,
+      required this.latestTime});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['msg_id'] = Variable<String>(msgId);
-    map['from'] = Variable<String>(from);
-    map['from_avatar'] = Variable<String>(fromAvatar);
-    map['from_name'] = Variable<String>(fromName);
-    map['to'] = Variable<String>(to);
-    map['to_avatar'] = Variable<String>(toAvatar);
-    map['to_name'] = Variable<String>(toName);
-    map['chat_type'] = Variable<int>(chatType);
-    map['msg_type'] = Variable<int>(msgType);
-    map['msg'] = Variable<String>(msg);
-    if (!nullToAbsent || msgInfo != null) {
-      map['msg_info'] = Variable<String>(msgInfo);
+    map['conversationId'] = Variable<String>(conversationId);
+    map['conversationType'] = Variable<int>(conversationType);
+    map['memberId'] = Variable<String>(memberId);
+    map['memberType'] = Variable<int>(memberType);
+    map['userId'] = Variable<String>(userId);
+    if (!nullToAbsent || nickname != null) {
+      map['nickname'] = Variable<String>(nickname);
     }
-    map['send_time'] = Variable<DateTime>(sendTime);
-    map['send_status'] = Variable<int>(sendStatus);
-    map['session_id'] = Variable<int>(sessionId);
+    if (!nullToAbsent || avatarPath != null) {
+      map['avatarPath'] = Variable<String>(avatarPath);
+    }
+    if (!nullToAbsent || backgroundPath != null) {
+      map['backgroundPath'] = Variable<String>(backgroundPath);
+    }
+    if (!nullToAbsent || characterName != null) {
+      map['characterName'] = Variable<String>(characterName);
+    }
+    if (!nullToAbsent || toId != null) {
+      map['toId'] = Variable<String>(toId);
+    }
+    if (!nullToAbsent || toUserName != null) {
+      map['toUserName'] = Variable<String>(toUserName);
+    }
+    if (!nullToAbsent || toAvatarPath != null) {
+      map['toAvatarPath'] = Variable<String>(toAvatarPath);
+    }
+    if (!nullToAbsent || lastMsg != null) {
+      map['lastMsg'] = Variable<String>(lastMsg);
+    }
+    if (!nullToAbsent || lastMsgType != null) {
+      map['lastMsgType'] = Variable<String>(lastMsgType);
+    }
+    map['latestTime'] = Variable<String>(latestTime);
     return map;
   }
 
-  ChatHistoryCompanion toCompanion(bool nullToAbsent) {
-    return ChatHistoryCompanion(
+  ConversationCompanion toCompanion(bool nullToAbsent) {
+    return ConversationCompanion(
       id: Value(id),
-      msgId: Value(msgId),
-      from: Value(from),
-      fromAvatar: Value(fromAvatar),
-      fromName: Value(fromName),
-      to: Value(to),
-      toAvatar: Value(toAvatar),
-      toName: Value(toName),
-      chatType: Value(chatType),
-      msgType: Value(msgType),
-      msg: Value(msg),
-      msgInfo: msgInfo == null && nullToAbsent
+      conversationId: Value(conversationId),
+      conversationType: Value(conversationType),
+      memberId: Value(memberId),
+      memberType: Value(memberType),
+      userId: Value(userId),
+      nickname: nickname == null && nullToAbsent
           ? const Value.absent()
-          : Value(msgInfo),
-      sendTime: Value(sendTime),
-      sendStatus: Value(sendStatus),
-      sessionId: Value(sessionId),
+          : Value(nickname),
+      avatarPath: avatarPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(avatarPath),
+      backgroundPath: backgroundPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(backgroundPath),
+      characterName: characterName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(characterName),
+      toId: toId == null && nullToAbsent ? const Value.absent() : Value(toId),
+      toUserName: toUserName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(toUserName),
+      toAvatarPath: toAvatarPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(toAvatarPath),
+      lastMsg: lastMsg == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastMsg),
+      lastMsgType: lastMsgType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastMsgType),
+      latestTime: Value(latestTime),
     );
   }
 
-  factory ChatHistoryData.fromJson(Map<String, dynamic> json,
+  factory ConversationData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ChatHistoryData(
+    return ConversationData(
       id: serializer.fromJson<int>(json['id']),
-      msgId: serializer.fromJson<String>(json['msgId']),
-      from: serializer.fromJson<String>(json['from']),
-      fromAvatar: serializer.fromJson<String>(json['fromAvatar']),
-      fromName: serializer.fromJson<String>(json['fromName']),
-      to: serializer.fromJson<String>(json['to']),
-      toAvatar: serializer.fromJson<String>(json['toAvatar']),
-      toName: serializer.fromJson<String>(json['toName']),
-      chatType: serializer.fromJson<int>(json['chatType']),
-      msgType: serializer.fromJson<int>(json['msgType']),
-      msg: serializer.fromJson<String>(json['msg']),
-      msgInfo: serializer.fromJson<String?>(json['msgInfo']),
-      sendTime: serializer.fromJson<DateTime>(json['sendTime']),
-      sendStatus: serializer.fromJson<int>(json['sendStatus']),
-      sessionId: serializer.fromJson<int>(json['sessionId']),
+      conversationId: serializer.fromJson<String>(json['conversationId']),
+      conversationType: serializer.fromJson<int>(json['conversationType']),
+      memberId: serializer.fromJson<String>(json['memberId']),
+      memberType: serializer.fromJson<int>(json['memberType']),
+      userId: serializer.fromJson<String>(json['userId']),
+      nickname: serializer.fromJson<String?>(json['nickname']),
+      avatarPath: serializer.fromJson<String?>(json['avatarPath']),
+      backgroundPath: serializer.fromJson<String?>(json['backgroundPath']),
+      characterName: serializer.fromJson<String?>(json['characterName']),
+      toId: serializer.fromJson<String?>(json['toId']),
+      toUserName: serializer.fromJson<String?>(json['toUserName']),
+      toAvatarPath: serializer.fromJson<String?>(json['toAvatarPath']),
+      lastMsg: serializer.fromJson<String?>(json['lastMsg']),
+      lastMsgType: serializer.fromJson<String?>(json['lastMsgType']),
+      latestTime: serializer.fromJson<String>(json['latestTime']),
     );
   }
+  factory ConversationData.fromJsonString(String encodedJson,
+          {ValueSerializer? serializer}) =>
+      ConversationData.fromJson(
+          DataClass.parseJson(encodedJson) as Map<String, dynamic>,
+          serializer: serializer);
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'msgId': serializer.toJson<String>(msgId),
-      'from': serializer.toJson<String>(from),
-      'fromAvatar': serializer.toJson<String>(fromAvatar),
-      'fromName': serializer.toJson<String>(fromName),
-      'to': serializer.toJson<String>(to),
-      'toAvatar': serializer.toJson<String>(toAvatar),
-      'toName': serializer.toJson<String>(toName),
-      'chatType': serializer.toJson<int>(chatType),
-      'msgType': serializer.toJson<int>(msgType),
-      'msg': serializer.toJson<String>(msg),
-      'msgInfo': serializer.toJson<String?>(msgInfo),
-      'sendTime': serializer.toJson<DateTime>(sendTime),
-      'sendStatus': serializer.toJson<int>(sendStatus),
-      'sessionId': serializer.toJson<int>(sessionId),
+      'conversationId': serializer.toJson<String>(conversationId),
+      'conversationType': serializer.toJson<int>(conversationType),
+      'memberId': serializer.toJson<String>(memberId),
+      'memberType': serializer.toJson<int>(memberType),
+      'userId': serializer.toJson<String>(userId),
+      'nickname': serializer.toJson<String?>(nickname),
+      'avatarPath': serializer.toJson<String?>(avatarPath),
+      'backgroundPath': serializer.toJson<String?>(backgroundPath),
+      'characterName': serializer.toJson<String?>(characterName),
+      'toId': serializer.toJson<String?>(toId),
+      'toUserName': serializer.toJson<String?>(toUserName),
+      'toAvatarPath': serializer.toJson<String?>(toAvatarPath),
+      'lastMsg': serializer.toJson<String?>(lastMsg),
+      'lastMsgType': serializer.toJson<String?>(lastMsgType),
+      'latestTime': serializer.toJson<String>(latestTime),
     };
   }
 
-  ChatHistoryData copyWith(
+  ConversationData copyWith(
           {int? id,
-          String? msgId,
-          String? from,
-          String? fromAvatar,
-          String? fromName,
-          String? to,
-          String? toAvatar,
-          String? toName,
-          int? chatType,
-          int? msgType,
-          String? msg,
-          Value<String?> msgInfo = const Value.absent(),
-          DateTime? sendTime,
-          int? sendStatus,
-          int? sessionId}) =>
-      ChatHistoryData(
+          String? conversationId,
+          int? conversationType,
+          String? memberId,
+          int? memberType,
+          String? userId,
+          Value<String?> nickname = const Value.absent(),
+          Value<String?> avatarPath = const Value.absent(),
+          Value<String?> backgroundPath = const Value.absent(),
+          Value<String?> characterName = const Value.absent(),
+          Value<String?> toId = const Value.absent(),
+          Value<String?> toUserName = const Value.absent(),
+          Value<String?> toAvatarPath = const Value.absent(),
+          Value<String?> lastMsg = const Value.absent(),
+          Value<String?> lastMsgType = const Value.absent(),
+          String? latestTime}) =>
+      ConversationData(
         id: id ?? this.id,
-        msgId: msgId ?? this.msgId,
-        from: from ?? this.from,
-        fromAvatar: fromAvatar ?? this.fromAvatar,
-        fromName: fromName ?? this.fromName,
-        to: to ?? this.to,
-        toAvatar: toAvatar ?? this.toAvatar,
-        toName: toName ?? this.toName,
-        chatType: chatType ?? this.chatType,
-        msgType: msgType ?? this.msgType,
-        msg: msg ?? this.msg,
-        msgInfo: msgInfo.present ? msgInfo.value : this.msgInfo,
-        sendTime: sendTime ?? this.sendTime,
-        sendStatus: sendStatus ?? this.sendStatus,
-        sessionId: sessionId ?? this.sessionId,
+        conversationId: conversationId ?? this.conversationId,
+        conversationType: conversationType ?? this.conversationType,
+        memberId: memberId ?? this.memberId,
+        memberType: memberType ?? this.memberType,
+        userId: userId ?? this.userId,
+        nickname: nickname.present ? nickname.value : this.nickname,
+        avatarPath: avatarPath.present ? avatarPath.value : this.avatarPath,
+        backgroundPath:
+            backgroundPath.present ? backgroundPath.value : this.backgroundPath,
+        characterName:
+            characterName.present ? characterName.value : this.characterName,
+        toId: toId.present ? toId.value : this.toId,
+        toUserName: toUserName.present ? toUserName.value : this.toUserName,
+        toAvatarPath:
+            toAvatarPath.present ? toAvatarPath.value : this.toAvatarPath,
+        lastMsg: lastMsg.present ? lastMsg.value : this.lastMsg,
+        lastMsgType: lastMsgType.present ? lastMsgType.value : this.lastMsgType,
+        latestTime: latestTime ?? this.latestTime,
       );
   @override
   String toString() {
-    return (StringBuffer('ChatHistoryData(')
+    return (StringBuffer('ConversationData(')
           ..write('id: $id, ')
-          ..write('msgId: $msgId, ')
-          ..write('from: $from, ')
-          ..write('fromAvatar: $fromAvatar, ')
-          ..write('fromName: $fromName, ')
-          ..write('to: $to, ')
-          ..write('toAvatar: $toAvatar, ')
-          ..write('toName: $toName, ')
-          ..write('chatType: $chatType, ')
-          ..write('msgType: $msgType, ')
-          ..write('msg: $msg, ')
-          ..write('msgInfo: $msgInfo, ')
-          ..write('sendTime: $sendTime, ')
-          ..write('sendStatus: $sendStatus, ')
-          ..write('sessionId: $sessionId')
+          ..write('conversationId: $conversationId, ')
+          ..write('conversationType: $conversationType, ')
+          ..write('memberId: $memberId, ')
+          ..write('memberType: $memberType, ')
+          ..write('userId: $userId, ')
+          ..write('nickname: $nickname, ')
+          ..write('avatarPath: $avatarPath, ')
+          ..write('backgroundPath: $backgroundPath, ')
+          ..write('characterName: $characterName, ')
+          ..write('toId: $toId, ')
+          ..write('toUserName: $toUserName, ')
+          ..write('toAvatarPath: $toAvatarPath, ')
+          ..write('lastMsg: $lastMsg, ')
+          ..write('lastMsgType: $lastMsgType, ')
+          ..write('latestTime: $latestTime')
           ..write(')'))
         .toString();
   }
@@ -2266,668 +2189,173 @@ class ChatHistoryData extends DataClass implements Insertable<ChatHistoryData> {
   @override
   int get hashCode => Object.hash(
       id,
-      msgId,
-      from,
-      fromAvatar,
-      fromName,
-      to,
-      toAvatar,
-      toName,
-      chatType,
-      msgType,
-      msg,
-      msgInfo,
-      sendTime,
-      sendStatus,
-      sessionId);
+      conversationId,
+      conversationType,
+      memberId,
+      memberType,
+      userId,
+      nickname,
+      avatarPath,
+      backgroundPath,
+      characterName,
+      toId,
+      toUserName,
+      toAvatarPath,
+      lastMsg,
+      lastMsgType,
+      latestTime);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ChatHistoryData &&
+      (other is ConversationData &&
           other.id == this.id &&
-          other.msgId == this.msgId &&
-          other.from == this.from &&
-          other.fromAvatar == this.fromAvatar &&
-          other.fromName == this.fromName &&
-          other.to == this.to &&
-          other.toAvatar == this.toAvatar &&
-          other.toName == this.toName &&
-          other.chatType == this.chatType &&
-          other.msgType == this.msgType &&
-          other.msg == this.msg &&
-          other.msgInfo == this.msgInfo &&
-          other.sendTime == this.sendTime &&
-          other.sendStatus == this.sendStatus &&
-          other.sessionId == this.sessionId);
-}
-
-class ChatHistoryCompanion extends UpdateCompanion<ChatHistoryData> {
-  final Value<int> id;
-  final Value<String> msgId;
-  final Value<String> from;
-  final Value<String> fromAvatar;
-  final Value<String> fromName;
-  final Value<String> to;
-  final Value<String> toAvatar;
-  final Value<String> toName;
-  final Value<int> chatType;
-  final Value<int> msgType;
-  final Value<String> msg;
-  final Value<String?> msgInfo;
-  final Value<DateTime> sendTime;
-  final Value<int> sendStatus;
-  final Value<int> sessionId;
-  const ChatHistoryCompanion({
-    this.id = const Value.absent(),
-    this.msgId = const Value.absent(),
-    this.from = const Value.absent(),
-    this.fromAvatar = const Value.absent(),
-    this.fromName = const Value.absent(),
-    this.to = const Value.absent(),
-    this.toAvatar = const Value.absent(),
-    this.toName = const Value.absent(),
-    this.chatType = const Value.absent(),
-    this.msgType = const Value.absent(),
-    this.msg = const Value.absent(),
-    this.msgInfo = const Value.absent(),
-    this.sendTime = const Value.absent(),
-    this.sendStatus = const Value.absent(),
-    this.sessionId = const Value.absent(),
-  });
-  ChatHistoryCompanion.insert({
-    this.id = const Value.absent(),
-    required String msgId,
-    required String from,
-    required String fromAvatar,
-    required String fromName,
-    required String to,
-    required String toAvatar,
-    required String toName,
-    required int chatType,
-    this.msgType = const Value.absent(),
-    required String msg,
-    this.msgInfo = const Value.absent(),
-    required DateTime sendTime,
-    required int sendStatus,
-    required int sessionId,
-  })  : msgId = Value(msgId),
-        from = Value(from),
-        fromAvatar = Value(fromAvatar),
-        fromName = Value(fromName),
-        to = Value(to),
-        toAvatar = Value(toAvatar),
-        toName = Value(toName),
-        chatType = Value(chatType),
-        msg = Value(msg),
-        sendTime = Value(sendTime),
-        sendStatus = Value(sendStatus),
-        sessionId = Value(sessionId);
-  static Insertable<ChatHistoryData> custom({
-    Expression<int>? id,
-    Expression<String>? msgId,
-    Expression<String>? from,
-    Expression<String>? fromAvatar,
-    Expression<String>? fromName,
-    Expression<String>? to,
-    Expression<String>? toAvatar,
-    Expression<String>? toName,
-    Expression<int>? chatType,
-    Expression<int>? msgType,
-    Expression<String>? msg,
-    Expression<String>? msgInfo,
-    Expression<DateTime>? sendTime,
-    Expression<int>? sendStatus,
-    Expression<int>? sessionId,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (msgId != null) 'msg_id': msgId,
-      if (from != null) 'from': from,
-      if (fromAvatar != null) 'from_avatar': fromAvatar,
-      if (fromName != null) 'from_name': fromName,
-      if (to != null) 'to': to,
-      if (toAvatar != null) 'to_avatar': toAvatar,
-      if (toName != null) 'to_name': toName,
-      if (chatType != null) 'chat_type': chatType,
-      if (msgType != null) 'msg_type': msgType,
-      if (msg != null) 'msg': msg,
-      if (msgInfo != null) 'msg_info': msgInfo,
-      if (sendTime != null) 'send_time': sendTime,
-      if (sendStatus != null) 'send_status': sendStatus,
-      if (sessionId != null) 'session_id': sessionId,
-    });
-  }
-
-  ChatHistoryCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? msgId,
-      Value<String>? from,
-      Value<String>? fromAvatar,
-      Value<String>? fromName,
-      Value<String>? to,
-      Value<String>? toAvatar,
-      Value<String>? toName,
-      Value<int>? chatType,
-      Value<int>? msgType,
-      Value<String>? msg,
-      Value<String?>? msgInfo,
-      Value<DateTime>? sendTime,
-      Value<int>? sendStatus,
-      Value<int>? sessionId}) {
-    return ChatHistoryCompanion(
-      id: id ?? this.id,
-      msgId: msgId ?? this.msgId,
-      from: from ?? this.from,
-      fromAvatar: fromAvatar ?? this.fromAvatar,
-      fromName: fromName ?? this.fromName,
-      to: to ?? this.to,
-      toAvatar: toAvatar ?? this.toAvatar,
-      toName: toName ?? this.toName,
-      chatType: chatType ?? this.chatType,
-      msgType: msgType ?? this.msgType,
-      msg: msg ?? this.msg,
-      msgInfo: msgInfo ?? this.msgInfo,
-      sendTime: sendTime ?? this.sendTime,
-      sendStatus: sendStatus ?? this.sendStatus,
-      sessionId: sessionId ?? this.sessionId,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (msgId.present) {
-      map['msg_id'] = Variable<String>(msgId.value);
-    }
-    if (from.present) {
-      map['from'] = Variable<String>(from.value);
-    }
-    if (fromAvatar.present) {
-      map['from_avatar'] = Variable<String>(fromAvatar.value);
-    }
-    if (fromName.present) {
-      map['from_name'] = Variable<String>(fromName.value);
-    }
-    if (to.present) {
-      map['to'] = Variable<String>(to.value);
-    }
-    if (toAvatar.present) {
-      map['to_avatar'] = Variable<String>(toAvatar.value);
-    }
-    if (toName.present) {
-      map['to_name'] = Variable<String>(toName.value);
-    }
-    if (chatType.present) {
-      map['chat_type'] = Variable<int>(chatType.value);
-    }
-    if (msgType.present) {
-      map['msg_type'] = Variable<int>(msgType.value);
-    }
-    if (msg.present) {
-      map['msg'] = Variable<String>(msg.value);
-    }
-    if (msgInfo.present) {
-      map['msg_info'] = Variable<String>(msgInfo.value);
-    }
-    if (sendTime.present) {
-      map['send_time'] = Variable<DateTime>(sendTime.value);
-    }
-    if (sendStatus.present) {
-      map['send_status'] = Variable<int>(sendStatus.value);
-    }
-    if (sessionId.present) {
-      map['session_id'] = Variable<int>(sessionId.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ChatHistoryCompanion(')
-          ..write('id: $id, ')
-          ..write('msgId: $msgId, ')
-          ..write('from: $from, ')
-          ..write('fromAvatar: $fromAvatar, ')
-          ..write('fromName: $fromName, ')
-          ..write('to: $to, ')
-          ..write('toAvatar: $toAvatar, ')
-          ..write('toName: $toName, ')
-          ..write('chatType: $chatType, ')
-          ..write('msgType: $msgType, ')
-          ..write('msg: $msg, ')
-          ..write('msgInfo: $msgInfo, ')
-          ..write('sendTime: $sendTime, ')
-          ..write('sendStatus: $sendStatus, ')
-          ..write('sessionId: $sessionId')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $ChatSessionsTable extends ChatSessions
-    with TableInfo<$ChatSessionsTable, ChatSession> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $ChatSessionsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _sessionidMeta =
-      const VerificationMeta('sessionid');
-  @override
-  late final GeneratedColumn<String> sessionid = GeneratedColumn<String>(
-      'sessionid', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
-  @override
-  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
-      'user_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _characterIdMeta =
-      const VerificationMeta('characterId');
-  @override
-  late final GeneratedColumn<int> characterId = GeneratedColumn<int>(
-      'character_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _characterAvatarMeta =
-      const VerificationMeta('characterAvatar');
-  @override
-  late final GeneratedColumn<String> characterAvatar = GeneratedColumn<String>(
-      'character_avatar', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _lastMsgMeta =
-      const VerificationMeta('lastMsg');
-  @override
-  late final GeneratedColumn<String> lastMsg = GeneratedColumn<String>(
-      'last_msg', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _latestTimeMeta =
-      const VerificationMeta('latestTime');
-  @override
-  late final GeneratedColumn<DateTime> latestTime = GeneratedColumn<DateTime>(
-      'latest_time', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _lastMsgTypeMeta =
-      const VerificationMeta('lastMsgType');
-  @override
-  late final GeneratedColumn<String> lastMsgType = GeneratedColumn<String>(
-      'last_msg_type', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _characterNameMeta =
-      const VerificationMeta('characterName');
-  @override
-  late final GeneratedColumn<String> characterName = GeneratedColumn<String>(
-      'character_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        sessionid,
-        userId,
-        characterId,
-        characterAvatar,
-        lastMsg,
-        latestTime,
-        lastMsgType,
-        characterName
-      ];
-  @override
-  String get aliasedName => _alias ?? 'chat_sessions';
-  @override
-  String get actualTableName => 'chat_sessions';
-  @override
-  VerificationContext validateIntegrity(Insertable<ChatSession> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('sessionid')) {
-      context.handle(_sessionidMeta,
-          sessionid.isAcceptableOrUnknown(data['sessionid']!, _sessionidMeta));
-    } else if (isInserting) {
-      context.missing(_sessionidMeta);
-    }
-    if (data.containsKey('user_id')) {
-      context.handle(_userIdMeta,
-          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
-    } else if (isInserting) {
-      context.missing(_userIdMeta);
-    }
-    if (data.containsKey('character_id')) {
-      context.handle(
-          _characterIdMeta,
-          characterId.isAcceptableOrUnknown(
-              data['character_id']!, _characterIdMeta));
-    } else if (isInserting) {
-      context.missing(_characterIdMeta);
-    }
-    if (data.containsKey('character_avatar')) {
-      context.handle(
-          _characterAvatarMeta,
-          characterAvatar.isAcceptableOrUnknown(
-              data['character_avatar']!, _characterAvatarMeta));
-    }
-    if (data.containsKey('last_msg')) {
-      context.handle(_lastMsgMeta,
-          lastMsg.isAcceptableOrUnknown(data['last_msg']!, _lastMsgMeta));
-    }
-    if (data.containsKey('latest_time')) {
-      context.handle(
-          _latestTimeMeta,
-          latestTime.isAcceptableOrUnknown(
-              data['latest_time']!, _latestTimeMeta));
-    }
-    if (data.containsKey('last_msg_type')) {
-      context.handle(
-          _lastMsgTypeMeta,
-          lastMsgType.isAcceptableOrUnknown(
-              data['last_msg_type']!, _lastMsgTypeMeta));
-    }
-    if (data.containsKey('character_name')) {
-      context.handle(
-          _characterNameMeta,
-          characterName.isAcceptableOrUnknown(
-              data['character_name']!, _characterNameMeta));
-    } else if (isInserting) {
-      context.missing(_characterNameMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  ChatSession map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ChatSession(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      sessionid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}sessionid'])!,
-      userId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
-      characterId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}character_id'])!,
-      characterAvatar: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}character_avatar']),
-      lastMsg: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}last_msg']),
-      latestTime: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}latest_time']),
-      lastMsgType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}last_msg_type']),
-      characterName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}character_name'])!,
-    );
-  }
-
-  @override
-  $ChatSessionsTable createAlias(String alias) {
-    return $ChatSessionsTable(attachedDatabase, alias);
-  }
-}
-
-class ChatSession extends DataClass implements Insertable<ChatSession> {
-  /// 自增id
-  final int id;
-
-  /// 会话id
-  final String sessionid;
-
-  /// 用户id
-  final String userId;
-
-  /// 角色id
-  final int characterId;
-
-  /// 角色头像
-  final String? characterAvatar;
-
-  /// 最新一条消息
-  final String? lastMsg;
-
-  /// 最新一条消息时间
-  final DateTime? latestTime;
-
-  /// 最新一条消息类型
-  final String? lastMsgType;
-
-  /// 角色名称
-  final String characterName;
-  const ChatSession(
-      {required this.id,
-      required this.sessionid,
-      required this.userId,
-      required this.characterId,
-      this.characterAvatar,
-      this.lastMsg,
-      this.latestTime,
-      this.lastMsgType,
-      required this.characterName});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['sessionid'] = Variable<String>(sessionid);
-    map['user_id'] = Variable<String>(userId);
-    map['character_id'] = Variable<int>(characterId);
-    if (!nullToAbsent || characterAvatar != null) {
-      map['character_avatar'] = Variable<String>(characterAvatar);
-    }
-    if (!nullToAbsent || lastMsg != null) {
-      map['last_msg'] = Variable<String>(lastMsg);
-    }
-    if (!nullToAbsent || latestTime != null) {
-      map['latest_time'] = Variable<DateTime>(latestTime);
-    }
-    if (!nullToAbsent || lastMsgType != null) {
-      map['last_msg_type'] = Variable<String>(lastMsgType);
-    }
-    map['character_name'] = Variable<String>(characterName);
-    return map;
-  }
-
-  ChatSessionsCompanion toCompanion(bool nullToAbsent) {
-    return ChatSessionsCompanion(
-      id: Value(id),
-      sessionid: Value(sessionid),
-      userId: Value(userId),
-      characterId: Value(characterId),
-      characterAvatar: characterAvatar == null && nullToAbsent
-          ? const Value.absent()
-          : Value(characterAvatar),
-      lastMsg: lastMsg == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastMsg),
-      latestTime: latestTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(latestTime),
-      lastMsgType: lastMsgType == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastMsgType),
-      characterName: Value(characterName),
-    );
-  }
-
-  factory ChatSession.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ChatSession(
-      id: serializer.fromJson<int>(json['id']),
-      sessionid: serializer.fromJson<String>(json['sessionid']),
-      userId: serializer.fromJson<String>(json['userId']),
-      characterId: serializer.fromJson<int>(json['characterId']),
-      characterAvatar: serializer.fromJson<String?>(json['characterAvatar']),
-      lastMsg: serializer.fromJson<String?>(json['lastMsg']),
-      latestTime: serializer.fromJson<DateTime?>(json['latestTime']),
-      lastMsgType: serializer.fromJson<String?>(json['lastMsgType']),
-      characterName: serializer.fromJson<String>(json['characterName']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'sessionid': serializer.toJson<String>(sessionid),
-      'userId': serializer.toJson<String>(userId),
-      'characterId': serializer.toJson<int>(characterId),
-      'characterAvatar': serializer.toJson<String?>(characterAvatar),
-      'lastMsg': serializer.toJson<String?>(lastMsg),
-      'latestTime': serializer.toJson<DateTime?>(latestTime),
-      'lastMsgType': serializer.toJson<String?>(lastMsgType),
-      'characterName': serializer.toJson<String>(characterName),
-    };
-  }
-
-  ChatSession copyWith(
-          {int? id,
-          String? sessionid,
-          String? userId,
-          int? characterId,
-          Value<String?> characterAvatar = const Value.absent(),
-          Value<String?> lastMsg = const Value.absent(),
-          Value<DateTime?> latestTime = const Value.absent(),
-          Value<String?> lastMsgType = const Value.absent(),
-          String? characterName}) =>
-      ChatSession(
-        id: id ?? this.id,
-        sessionid: sessionid ?? this.sessionid,
-        userId: userId ?? this.userId,
-        characterId: characterId ?? this.characterId,
-        characterAvatar: characterAvatar.present
-            ? characterAvatar.value
-            : this.characterAvatar,
-        lastMsg: lastMsg.present ? lastMsg.value : this.lastMsg,
-        latestTime: latestTime.present ? latestTime.value : this.latestTime,
-        lastMsgType: lastMsgType.present ? lastMsgType.value : this.lastMsgType,
-        characterName: characterName ?? this.characterName,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('ChatSession(')
-          ..write('id: $id, ')
-          ..write('sessionid: $sessionid, ')
-          ..write('userId: $userId, ')
-          ..write('characterId: $characterId, ')
-          ..write('characterAvatar: $characterAvatar, ')
-          ..write('lastMsg: $lastMsg, ')
-          ..write('latestTime: $latestTime, ')
-          ..write('lastMsgType: $lastMsgType, ')
-          ..write('characterName: $characterName')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, sessionid, userId, characterId,
-      characterAvatar, lastMsg, latestTime, lastMsgType, characterName);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ChatSession &&
-          other.id == this.id &&
-          other.sessionid == this.sessionid &&
+          other.conversationId == this.conversationId &&
+          other.conversationType == this.conversationType &&
+          other.memberId == this.memberId &&
+          other.memberType == this.memberType &&
           other.userId == this.userId &&
-          other.characterId == this.characterId &&
-          other.characterAvatar == this.characterAvatar &&
+          other.nickname == this.nickname &&
+          other.avatarPath == this.avatarPath &&
+          other.backgroundPath == this.backgroundPath &&
+          other.characterName == this.characterName &&
+          other.toId == this.toId &&
+          other.toUserName == this.toUserName &&
+          other.toAvatarPath == this.toAvatarPath &&
           other.lastMsg == this.lastMsg &&
-          other.latestTime == this.latestTime &&
           other.lastMsgType == this.lastMsgType &&
-          other.characterName == this.characterName);
+          other.latestTime == this.latestTime);
 }
 
-class ChatSessionsCompanion extends UpdateCompanion<ChatSession> {
+class ConversationCompanion extends UpdateCompanion<ConversationData> {
   final Value<int> id;
-  final Value<String> sessionid;
+  final Value<String> conversationId;
+  final Value<int> conversationType;
+  final Value<String> memberId;
+  final Value<int> memberType;
   final Value<String> userId;
-  final Value<int> characterId;
-  final Value<String?> characterAvatar;
+  final Value<String?> nickname;
+  final Value<String?> avatarPath;
+  final Value<String?> backgroundPath;
+  final Value<String?> characterName;
+  final Value<String?> toId;
+  final Value<String?> toUserName;
+  final Value<String?> toAvatarPath;
   final Value<String?> lastMsg;
-  final Value<DateTime?> latestTime;
   final Value<String?> lastMsgType;
-  final Value<String> characterName;
-  const ChatSessionsCompanion({
+  final Value<String> latestTime;
+  const ConversationCompanion({
     this.id = const Value.absent(),
-    this.sessionid = const Value.absent(),
+    this.conversationId = const Value.absent(),
+    this.conversationType = const Value.absent(),
+    this.memberId = const Value.absent(),
+    this.memberType = const Value.absent(),
     this.userId = const Value.absent(),
-    this.characterId = const Value.absent(),
-    this.characterAvatar = const Value.absent(),
-    this.lastMsg = const Value.absent(),
-    this.latestTime = const Value.absent(),
-    this.lastMsgType = const Value.absent(),
+    this.nickname = const Value.absent(),
+    this.avatarPath = const Value.absent(),
+    this.backgroundPath = const Value.absent(),
     this.characterName = const Value.absent(),
-  });
-  ChatSessionsCompanion.insert({
-    this.id = const Value.absent(),
-    required String sessionid,
-    required String userId,
-    required int characterId,
-    this.characterAvatar = const Value.absent(),
+    this.toId = const Value.absent(),
+    this.toUserName = const Value.absent(),
+    this.toAvatarPath = const Value.absent(),
     this.lastMsg = const Value.absent(),
-    this.latestTime = const Value.absent(),
     this.lastMsgType = const Value.absent(),
-    required String characterName,
-  })  : sessionid = Value(sessionid),
+    this.latestTime = const Value.absent(),
+  });
+  ConversationCompanion.insert({
+    this.id = const Value.absent(),
+    required String conversationId,
+    required int conversationType,
+    required String memberId,
+    required int memberType,
+    required String userId,
+    this.nickname = const Value.absent(),
+    this.avatarPath = const Value.absent(),
+    this.backgroundPath = const Value.absent(),
+    this.characterName = const Value.absent(),
+    this.toId = const Value.absent(),
+    this.toUserName = const Value.absent(),
+    this.toAvatarPath = const Value.absent(),
+    this.lastMsg = const Value.absent(),
+    this.lastMsgType = const Value.absent(),
+    required String latestTime,
+  })  : conversationId = Value(conversationId),
+        conversationType = Value(conversationType),
+        memberId = Value(memberId),
+        memberType = Value(memberType),
         userId = Value(userId),
-        characterId = Value(characterId),
-        characterName = Value(characterName);
-  static Insertable<ChatSession> custom({
+        latestTime = Value(latestTime);
+  static Insertable<ConversationData> custom({
     Expression<int>? id,
-    Expression<String>? sessionid,
+    Expression<String>? conversationId,
+    Expression<int>? conversationType,
+    Expression<String>? memberId,
+    Expression<int>? memberType,
     Expression<String>? userId,
-    Expression<int>? characterId,
-    Expression<String>? characterAvatar,
-    Expression<String>? lastMsg,
-    Expression<DateTime>? latestTime,
-    Expression<String>? lastMsgType,
+    Expression<String>? nickname,
+    Expression<String>? avatarPath,
+    Expression<String>? backgroundPath,
     Expression<String>? characterName,
+    Expression<String>? toId,
+    Expression<String>? toUserName,
+    Expression<String>? toAvatarPath,
+    Expression<String>? lastMsg,
+    Expression<String>? lastMsgType,
+    Expression<String>? latestTime,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (sessionid != null) 'sessionid': sessionid,
-      if (userId != null) 'user_id': userId,
-      if (characterId != null) 'character_id': characterId,
-      if (characterAvatar != null) 'character_avatar': characterAvatar,
-      if (lastMsg != null) 'last_msg': lastMsg,
-      if (latestTime != null) 'latest_time': latestTime,
-      if (lastMsgType != null) 'last_msg_type': lastMsgType,
-      if (characterName != null) 'character_name': characterName,
+      if (conversationId != null) 'conversationId': conversationId,
+      if (conversationType != null) 'conversationType': conversationType,
+      if (memberId != null) 'memberId': memberId,
+      if (memberType != null) 'memberType': memberType,
+      if (userId != null) 'userId': userId,
+      if (nickname != null) 'nickname': nickname,
+      if (avatarPath != null) 'avatarPath': avatarPath,
+      if (backgroundPath != null) 'backgroundPath': backgroundPath,
+      if (characterName != null) 'characterName': characterName,
+      if (toId != null) 'toId': toId,
+      if (toUserName != null) 'toUserName': toUserName,
+      if (toAvatarPath != null) 'toAvatarPath': toAvatarPath,
+      if (lastMsg != null) 'lastMsg': lastMsg,
+      if (lastMsgType != null) 'lastMsgType': lastMsgType,
+      if (latestTime != null) 'latestTime': latestTime,
     });
   }
 
-  ChatSessionsCompanion copyWith(
+  ConversationCompanion copyWith(
       {Value<int>? id,
-      Value<String>? sessionid,
+      Value<String>? conversationId,
+      Value<int>? conversationType,
+      Value<String>? memberId,
+      Value<int>? memberType,
       Value<String>? userId,
-      Value<int>? characterId,
-      Value<String?>? characterAvatar,
+      Value<String?>? nickname,
+      Value<String?>? avatarPath,
+      Value<String?>? backgroundPath,
+      Value<String?>? characterName,
+      Value<String?>? toId,
+      Value<String?>? toUserName,
+      Value<String?>? toAvatarPath,
       Value<String?>? lastMsg,
-      Value<DateTime?>? latestTime,
       Value<String?>? lastMsgType,
-      Value<String>? characterName}) {
-    return ChatSessionsCompanion(
+      Value<String>? latestTime}) {
+    return ConversationCompanion(
       id: id ?? this.id,
-      sessionid: sessionid ?? this.sessionid,
+      conversationId: conversationId ?? this.conversationId,
+      conversationType: conversationType ?? this.conversationType,
+      memberId: memberId ?? this.memberId,
+      memberType: memberType ?? this.memberType,
       userId: userId ?? this.userId,
-      characterId: characterId ?? this.characterId,
-      characterAvatar: characterAvatar ?? this.characterAvatar,
-      lastMsg: lastMsg ?? this.lastMsg,
-      latestTime: latestTime ?? this.latestTime,
-      lastMsgType: lastMsgType ?? this.lastMsgType,
+      nickname: nickname ?? this.nickname,
+      avatarPath: avatarPath ?? this.avatarPath,
+      backgroundPath: backgroundPath ?? this.backgroundPath,
       characterName: characterName ?? this.characterName,
+      toId: toId ?? this.toId,
+      toUserName: toUserName ?? this.toUserName,
+      toAvatarPath: toAvatarPath ?? this.toAvatarPath,
+      lastMsg: lastMsg ?? this.lastMsg,
+      lastMsgType: lastMsgType ?? this.lastMsgType,
+      latestTime: latestTime ?? this.latestTime,
     );
   }
 
@@ -2937,607 +2365,73 @@ class ChatSessionsCompanion extends UpdateCompanion<ChatSession> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (sessionid.present) {
-      map['sessionid'] = Variable<String>(sessionid.value);
+    if (conversationId.present) {
+      map['conversationId'] = Variable<String>(conversationId.value);
+    }
+    if (conversationType.present) {
+      map['conversationType'] = Variable<int>(conversationType.value);
+    }
+    if (memberId.present) {
+      map['memberId'] = Variable<String>(memberId.value);
+    }
+    if (memberType.present) {
+      map['memberType'] = Variable<int>(memberType.value);
     }
     if (userId.present) {
-      map['user_id'] = Variable<String>(userId.value);
+      map['userId'] = Variable<String>(userId.value);
     }
-    if (characterId.present) {
-      map['character_id'] = Variable<int>(characterId.value);
+    if (nickname.present) {
+      map['nickname'] = Variable<String>(nickname.value);
     }
-    if (characterAvatar.present) {
-      map['character_avatar'] = Variable<String>(characterAvatar.value);
+    if (avatarPath.present) {
+      map['avatarPath'] = Variable<String>(avatarPath.value);
     }
-    if (lastMsg.present) {
-      map['last_msg'] = Variable<String>(lastMsg.value);
-    }
-    if (latestTime.present) {
-      map['latest_time'] = Variable<DateTime>(latestTime.value);
-    }
-    if (lastMsgType.present) {
-      map['last_msg_type'] = Variable<String>(lastMsgType.value);
+    if (backgroundPath.present) {
+      map['backgroundPath'] = Variable<String>(backgroundPath.value);
     }
     if (characterName.present) {
-      map['character_name'] = Variable<String>(characterName.value);
+      map['characterName'] = Variable<String>(characterName.value);
+    }
+    if (toId.present) {
+      map['toId'] = Variable<String>(toId.value);
+    }
+    if (toUserName.present) {
+      map['toUserName'] = Variable<String>(toUserName.value);
+    }
+    if (toAvatarPath.present) {
+      map['toAvatarPath'] = Variable<String>(toAvatarPath.value);
+    }
+    if (lastMsg.present) {
+      map['lastMsg'] = Variable<String>(lastMsg.value);
+    }
+    if (lastMsgType.present) {
+      map['lastMsgType'] = Variable<String>(lastMsgType.value);
+    }
+    if (latestTime.present) {
+      map['latestTime'] = Variable<String>(latestTime.value);
     }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('ChatSessionsCompanion(')
+    return (StringBuffer('ConversationCompanion(')
           ..write('id: $id, ')
-          ..write('sessionid: $sessionid, ')
+          ..write('conversationId: $conversationId, ')
+          ..write('conversationType: $conversationType, ')
+          ..write('memberId: $memberId, ')
+          ..write('memberType: $memberType, ')
           ..write('userId: $userId, ')
-          ..write('characterId: $characterId, ')
-          ..write('characterAvatar: $characterAvatar, ')
+          ..write('nickname: $nickname, ')
+          ..write('avatarPath: $avatarPath, ')
+          ..write('backgroundPath: $backgroundPath, ')
+          ..write('characterName: $characterName, ')
+          ..write('toId: $toId, ')
+          ..write('toUserName: $toUserName, ')
+          ..write('toAvatarPath: $toAvatarPath, ')
           ..write('lastMsg: $lastMsg, ')
-          ..write('latestTime: $latestTime, ')
           ..write('lastMsgType: $lastMsgType, ')
-          ..write('characterName: $characterName')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $UserBehaviorTable extends UserBehavior
-    with TableInfo<$UserBehaviorTable, UserBehaviorData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $UserBehaviorTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
-  @override
-  late final GeneratedColumn<String> userId = GeneratedColumn<String>(
-      'user_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _lastSessionIdMeta =
-      const VerificationMeta('lastSessionId');
-  @override
-  late final GeneratedColumn<String> lastSessionId = GeneratedColumn<String>(
-      'last_session_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _lastChatTimeMeta =
-      const VerificationMeta('lastChatTime');
-  @override
-  late final GeneratedColumn<DateTime> lastChatTime = GeneratedColumn<DateTime>(
-      'last_chat_time', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, userId, lastSessionId, lastChatTime];
-  @override
-  String get aliasedName => _alias ?? 'user_behavior';
-  @override
-  String get actualTableName => 'user_behavior';
-  @override
-  VerificationContext validateIntegrity(Insertable<UserBehaviorData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
-    }
-    if (data.containsKey('user_id')) {
-      context.handle(_userIdMeta,
-          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
-    } else if (isInserting) {
-      context.missing(_userIdMeta);
-    }
-    if (data.containsKey('last_session_id')) {
-      context.handle(
-          _lastSessionIdMeta,
-          lastSessionId.isAcceptableOrUnknown(
-              data['last_session_id']!, _lastSessionIdMeta));
-    } else if (isInserting) {
-      context.missing(_lastSessionIdMeta);
-    }
-    if (data.containsKey('last_chat_time')) {
-      context.handle(
-          _lastChatTimeMeta,
-          lastChatTime.isAcceptableOrUnknown(
-              data['last_chat_time']!, _lastChatTimeMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => const {};
-  @override
-  UserBehaviorData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return UserBehaviorData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      userId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
-      lastSessionId: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}last_session_id'])!,
-      lastChatTime: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}last_chat_time']),
-    );
-  }
-
-  @override
-  $UserBehaviorTable createAlias(String alias) {
-    return $UserBehaviorTable(attachedDatabase, alias);
-  }
-}
-
-class UserBehaviorData extends DataClass
-    implements Insertable<UserBehaviorData> {
-  /// 自增id
-  final int id;
-
-  /// 用户id
-  final String userId;
-
-  ///最后一次会话id
-  final String lastSessionId;
-
-  ///最后一次会话时间
-  final DateTime? lastChatTime;
-  const UserBehaviorData(
-      {required this.id,
-      required this.userId,
-      required this.lastSessionId,
-      this.lastChatTime});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['user_id'] = Variable<String>(userId);
-    map['last_session_id'] = Variable<String>(lastSessionId);
-    if (!nullToAbsent || lastChatTime != null) {
-      map['last_chat_time'] = Variable<DateTime>(lastChatTime);
-    }
-    return map;
-  }
-
-  UserBehaviorCompanion toCompanion(bool nullToAbsent) {
-    return UserBehaviorCompanion(
-      id: Value(id),
-      userId: Value(userId),
-      lastSessionId: Value(lastSessionId),
-      lastChatTime: lastChatTime == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastChatTime),
-    );
-  }
-
-  factory UserBehaviorData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return UserBehaviorData(
-      id: serializer.fromJson<int>(json['id']),
-      userId: serializer.fromJson<String>(json['userId']),
-      lastSessionId: serializer.fromJson<String>(json['lastSessionId']),
-      lastChatTime: serializer.fromJson<DateTime?>(json['lastChatTime']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'userId': serializer.toJson<String>(userId),
-      'lastSessionId': serializer.toJson<String>(lastSessionId),
-      'lastChatTime': serializer.toJson<DateTime?>(lastChatTime),
-    };
-  }
-
-  UserBehaviorData copyWith(
-          {int? id,
-          String? userId,
-          String? lastSessionId,
-          Value<DateTime?> lastChatTime = const Value.absent()}) =>
-      UserBehaviorData(
-        id: id ?? this.id,
-        userId: userId ?? this.userId,
-        lastSessionId: lastSessionId ?? this.lastSessionId,
-        lastChatTime:
-            lastChatTime.present ? lastChatTime.value : this.lastChatTime,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('UserBehaviorData(')
-          ..write('id: $id, ')
-          ..write('userId: $userId, ')
-          ..write('lastSessionId: $lastSessionId, ')
-          ..write('lastChatTime: $lastChatTime')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, userId, lastSessionId, lastChatTime);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is UserBehaviorData &&
-          other.id == this.id &&
-          other.userId == this.userId &&
-          other.lastSessionId == this.lastSessionId &&
-          other.lastChatTime == this.lastChatTime);
-}
-
-class UserBehaviorCompanion extends UpdateCompanion<UserBehaviorData> {
-  final Value<int> id;
-  final Value<String> userId;
-  final Value<String> lastSessionId;
-  final Value<DateTime?> lastChatTime;
-  final Value<int> rowid;
-  const UserBehaviorCompanion({
-    this.id = const Value.absent(),
-    this.userId = const Value.absent(),
-    this.lastSessionId = const Value.absent(),
-    this.lastChatTime = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  UserBehaviorCompanion.insert({
-    required int id,
-    required String userId,
-    required String lastSessionId,
-    this.lastChatTime = const Value.absent(),
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        userId = Value(userId),
-        lastSessionId = Value(lastSessionId);
-  static Insertable<UserBehaviorData> custom({
-    Expression<int>? id,
-    Expression<String>? userId,
-    Expression<String>? lastSessionId,
-    Expression<DateTime>? lastChatTime,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (userId != null) 'user_id': userId,
-      if (lastSessionId != null) 'last_session_id': lastSessionId,
-      if (lastChatTime != null) 'last_chat_time': lastChatTime,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  UserBehaviorCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? userId,
-      Value<String>? lastSessionId,
-      Value<DateTime?>? lastChatTime,
-      Value<int>? rowid}) {
-    return UserBehaviorCompanion(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      lastSessionId: lastSessionId ?? this.lastSessionId,
-      lastChatTime: lastChatTime ?? this.lastChatTime,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (userId.present) {
-      map['user_id'] = Variable<String>(userId.value);
-    }
-    if (lastSessionId.present) {
-      map['last_session_id'] = Variable<String>(lastSessionId.value);
-    }
-    if (lastChatTime.present) {
-      map['last_chat_time'] = Variable<DateTime>(lastChatTime.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('UserBehaviorCompanion(')
-          ..write('id: $id, ')
-          ..write('userId: $userId, ')
-          ..write('lastSessionId: $lastSessionId, ')
-          ..write('lastChatTime: $lastChatTime, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $UserInteractionsTable extends UserInteractions
-    with TableInfo<$UserInteractionsTable, UserInteraction> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $UserInteractionsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
-  @override
-  late final GeneratedColumn<int> userId = GeneratedColumn<int>(
-      'user_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _typeIdMeta = const VerificationMeta('typeId');
-  @override
-  late final GeneratedColumn<int> typeId = GeneratedColumn<int>(
-      'type_id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _typeMeta = const VerificationMeta('type');
-  @override
-  late final GeneratedColumn<int> type = GeneratedColumn<int>(
-      'type', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _statusMeta = const VerificationMeta('status');
-  @override
-  late final GeneratedColumn<int> status = GeneratedColumn<int>(
-      'status', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
-  @override
-  List<GeneratedColumn> get $columns => [id, userId, typeId, type, status];
-  @override
-  String get aliasedName => _alias ?? 'user_interactions';
-  @override
-  String get actualTableName => 'user_interactions';
-  @override
-  VerificationContext validateIntegrity(Insertable<UserInteraction> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('user_id')) {
-      context.handle(_userIdMeta,
-          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
-    } else if (isInserting) {
-      context.missing(_userIdMeta);
-    }
-    if (data.containsKey('type_id')) {
-      context.handle(_typeIdMeta,
-          typeId.isAcceptableOrUnknown(data['type_id']!, _typeIdMeta));
-    } else if (isInserting) {
-      context.missing(_typeIdMeta);
-    }
-    if (data.containsKey('type')) {
-      context.handle(
-          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
-    } else if (isInserting) {
-      context.missing(_typeMeta);
-    }
-    if (data.containsKey('status')) {
-      context.handle(_statusMeta,
-          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  UserInteraction map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return UserInteraction(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      userId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}user_id'])!,
-      typeId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}type_id'])!,
-      type: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}type'])!,
-      status: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}status'])!,
-    );
-  }
-
-  @override
-  $UserInteractionsTable createAlias(String alias) {
-    return $UserInteractionsTable(attachedDatabase, alias);
-  }
-}
-
-class UserInteraction extends DataClass implements Insertable<UserInteraction> {
-  /// 自增id
-  final int id;
-
-  /// 用户id
-  final int userId;
-
-  /// 角色id/作品id
-  final int typeId;
-
-  /// 给角色点赞：0/给作品点赞：1
-  final int type;
-
-  ///点赞状态
-  final int status;
-  const UserInteraction(
-      {required this.id,
-      required this.userId,
-      required this.typeId,
-      required this.type,
-      required this.status});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['user_id'] = Variable<int>(userId);
-    map['type_id'] = Variable<int>(typeId);
-    map['type'] = Variable<int>(type);
-    map['status'] = Variable<int>(status);
-    return map;
-  }
-
-  UserInteractionsCompanion toCompanion(bool nullToAbsent) {
-    return UserInteractionsCompanion(
-      id: Value(id),
-      userId: Value(userId),
-      typeId: Value(typeId),
-      type: Value(type),
-      status: Value(status),
-    );
-  }
-
-  factory UserInteraction.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return UserInteraction(
-      id: serializer.fromJson<int>(json['id']),
-      userId: serializer.fromJson<int>(json['userId']),
-      typeId: serializer.fromJson<int>(json['typeId']),
-      type: serializer.fromJson<int>(json['type']),
-      status: serializer.fromJson<int>(json['status']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'userId': serializer.toJson<int>(userId),
-      'typeId': serializer.toJson<int>(typeId),
-      'type': serializer.toJson<int>(type),
-      'status': serializer.toJson<int>(status),
-    };
-  }
-
-  UserInteraction copyWith(
-          {int? id, int? userId, int? typeId, int? type, int? status}) =>
-      UserInteraction(
-        id: id ?? this.id,
-        userId: userId ?? this.userId,
-        typeId: typeId ?? this.typeId,
-        type: type ?? this.type,
-        status: status ?? this.status,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('UserInteraction(')
-          ..write('id: $id, ')
-          ..write('userId: $userId, ')
-          ..write('typeId: $typeId, ')
-          ..write('type: $type, ')
-          ..write('status: $status')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, userId, typeId, type, status);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is UserInteraction &&
-          other.id == this.id &&
-          other.userId == this.userId &&
-          other.typeId == this.typeId &&
-          other.type == this.type &&
-          other.status == this.status);
-}
-
-class UserInteractionsCompanion extends UpdateCompanion<UserInteraction> {
-  final Value<int> id;
-  final Value<int> userId;
-  final Value<int> typeId;
-  final Value<int> type;
-  final Value<int> status;
-  const UserInteractionsCompanion({
-    this.id = const Value.absent(),
-    this.userId = const Value.absent(),
-    this.typeId = const Value.absent(),
-    this.type = const Value.absent(),
-    this.status = const Value.absent(),
-  });
-  UserInteractionsCompanion.insert({
-    this.id = const Value.absent(),
-    required int userId,
-    required int typeId,
-    required int type,
-    this.status = const Value.absent(),
-  })  : userId = Value(userId),
-        typeId = Value(typeId),
-        type = Value(type);
-  static Insertable<UserInteraction> custom({
-    Expression<int>? id,
-    Expression<int>? userId,
-    Expression<int>? typeId,
-    Expression<int>? type,
-    Expression<int>? status,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (userId != null) 'user_id': userId,
-      if (typeId != null) 'type_id': typeId,
-      if (type != null) 'type': type,
-      if (status != null) 'status': status,
-    });
-  }
-
-  UserInteractionsCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? userId,
-      Value<int>? typeId,
-      Value<int>? type,
-      Value<int>? status}) {
-    return UserInteractionsCompanion(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      typeId: typeId ?? this.typeId,
-      type: type ?? this.type,
-      status: status ?? this.status,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (userId.present) {
-      map['user_id'] = Variable<int>(userId.value);
-    }
-    if (typeId.present) {
-      map['type_id'] = Variable<int>(typeId.value);
-    }
-    if (type.present) {
-      map['type'] = Variable<int>(type.value);
-    }
-    if (status.present) {
-      map['status'] = Variable<int>(status.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('UserInteractionsCompanion(')
-          ..write('id: $id, ')
-          ..write('userId: $userId, ')
-          ..write('typeId: $typeId, ')
-          ..write('type: $type, ')
-          ..write('status: $status')
+          ..write('latestTime: $latestTime')
           ..write(')'))
         .toString();
   }
@@ -3854,6 +2748,11 @@ class UserData extends DataClass implements Insertable<UserData> {
       characterNumberMax: serializer.fromJson<int>(json['characterNumberMax']),
     );
   }
+  factory UserData.fromJsonString(String encodedJson,
+          {ValueSerializer? serializer}) =>
+      UserData.fromJson(
+          DataClass.parseJson(encodedJson) as Map<String, dynamic>,
+          serializer: serializer);
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
@@ -4138,37 +3037,13 @@ class UserCompanion extends UpdateCompanion<UserData> {
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(e);
   late final $MessageTable message = $MessageTable(this);
-  late final $ChatItemTable chatItem = $ChatItemTable(this);
-  late final $CharactersTable characters = $CharactersTable(this);
-  late final $ChatHistoryTable chatHistory = $ChatHistoryTable(this);
-  late final $ChatSessionsTable chatSessions = $ChatSessionsTable(this);
-  late final $UserBehaviorTable userBehavior = $UserBehaviorTable(this);
-  late final $UserInteractionsTable userInteractions =
-      $UserInteractionsTable(this);
+  late final $CharacterTable character = $CharacterTable(this);
+  late final $ConversationTable conversation = $ConversationTable(this);
   late final $UserTable user = $UserTable(this);
-  late final MessageDao messageDao = MessageDao(this as MyDatabase);
-  late final ChatItemDao chatItemDao = ChatItemDao(this as MyDatabase);
-  late final CharactersDao charactersDao = CharactersDao(this as MyDatabase);
-  late final ChatHistoryDao chatHistoryDao = ChatHistoryDao(this as MyDatabase);
-  late final ChatSessionsDao chatSessionsDao =
-      ChatSessionsDao(this as MyDatabase);
-  late final UserBehaviorDao userBehaviorDao =
-      UserBehaviorDao(this as MyDatabase);
-  late final UserDao userDao = UserDao(this as MyDatabase);
-  late final UserInteractionsDao userInteractionsDao =
-      UserInteractionsDao(this as MyDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [
-        message,
-        chatItem,
-        characters,
-        chatHistory,
-        chatSessions,
-        userBehavior,
-        userInteractions,
-        user
-      ];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [message, character, conversation, user];
 }

@@ -1,6 +1,6 @@
 import 'package:drift_generate/database/database.dart';
 
-import '../entity/message_entity.dart';
+import '../entity/message.dart';
 import 'package:drift/drift.dart';
 part 'message_dao.g.dart';
 

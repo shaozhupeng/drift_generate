@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-class Characters extends Table {
+class Character extends Table {
   IntColumn get id => integer().autoIncrement()();
 
   /// 用户唯一id
